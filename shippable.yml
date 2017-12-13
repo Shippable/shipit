@@ -119,5 +119,27 @@ jobs:
       - TASK:
         - script: |
             pushd $(shipctl get_resource_state "shipit_repo")
-              ./tagAndPushSvcs.sh drydock dry-dock dhDrydock.txt shipit_repo
+              ./tagAndPushSvcs.sh drydock dry-dock dhDrydock.txt dry_dh_x86_64_Ubuntu_tag_push
+            popd
+
+  - name: ship_dh_x86_64_Ubuntu_tag_push
+    type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
+    steps:
+      - IN: x86_64_Ubuntu_14_04_prep_repo
+        switch: off
+      - IN: shipit_dh_cli
+        switch: off
+      - IN: shipit_gh_ssh
+        switch: off
+      - IN: microbase_img
+        switch: off
+      - IN: microbase_repo
+        switch: off
+      - IN: rel_prod
+      - TASK:
+        - script: |
+            pushd $(shipctl get_resource_state "shipit_repo")
+              ./tagAndPushSvcs.sh drydock shippable dhShippable.txt dry_dh_x86_64_Ubuntu_tag_push
             popd
