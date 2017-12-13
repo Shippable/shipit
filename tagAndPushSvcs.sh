@@ -8,7 +8,6 @@ export RES_GH_SSH="shipit_gh_ssh"
 export UP_TAG_NAME="master"
 export RES_VER="rel_prod"
 
-
 set_job_context() {
   eval `ssh-agent -s`
   ps -eaf | grep ssh

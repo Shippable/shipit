@@ -71,6 +71,50 @@ jobs:
         switch: off
       - IN: u16cppall_repo
         switch: off
+      - IN: u14_img
+        switch: off
+      - IN: u14_repo
+        switch: off
+      - IN: u14all_img
+        switch: off
+      - IN: u14all_repo
+        switch: off
+      - IN: u14nodall_img
+        switch: off
+      - IN: u14nodall_repo
+        switch: off
+      - IN: u14pytall_img
+        switch: off
+      - IN: u14pytall_repo
+        switch: off
+      - IN: u14cloall_img
+        switch: off
+      - IN: u14cloall_repo
+        switch: off
+      - IN: u14golall_img
+        switch: off
+      - IN: u14golall_repo
+        switch: off
+      - IN: u14javall_img
+        switch: off
+      - IN: u14javall_repo
+        switch: off
+      - IN: u14scaall_img
+        switch: off
+      - IN: u14scaall_repo
+        switch: off
+      - IN: u14ruball_img
+        switch: off
+      - IN: u14ruball_repo
+        switch: off
+      - IN: u14phpall_img
+        switch: off
+      - IN: u14phpall_repo
+        switch: off
+      - IN: u14cppall_img
+        switch: off
+      - IN: u14cppall_repo
+        switch: off
       - IN: rel_prod
       - TASK:
         - script: |
