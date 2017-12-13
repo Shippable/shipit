@@ -210,3 +210,42 @@ jobs:
             pushd $(shipctl get_resource_state "shipit_repo")
               ./tagAndPushSvcs.sh drydock shippable ghShippable.txt gh_ship_repos_tag_push true
             popd
+
+  ### Tagging ecr hosted services
+  - name: ship_ecr_x86_64_Ubuntu_tag_push
+    type: runSh
+    steps:
+      - IN: shipit_repo
+        switch: off
+      - IN: shipbits_ecr_v2_cli
+        scopes:
+          - ecr
+        switch: off
+      - IN: shipit_gh_ssh
+        switch: off
+      - IN: mktg_img
+        switch: off
+      - IN: mktg_repo
+        switch: off
+      - IN: micro_img
+        switch: off
+      - IN: micro_repo
+        switch: off
+      - IN: nexec_img
+        switch: off
+      - IN: nexec_repo
+        switch: off
+      - IN: api_img
+        switch: off
+      - IN: api_repo
+        switch: off
+      - IN: www_img
+        switch: off
+      - IN: www_repo
+        switch: off
+      - IN: rel_prod
+      - TASK:
+        - script: |
+            pushd $(shipctl get_resource_state "shipit_repo")
+              ./tagAndPushSvcs.sh 374168611083.dkr.ecr.us-east-1.amazonaws.com shippable ecrShippable.txt ship_ecr_x86_64_Ubuntu_tag_push
+            popd
