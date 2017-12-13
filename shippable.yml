@@ -137,10 +137,10 @@ jobs:
         switch: off
       - IN: rel_prod
       - TASK:
-        - script: |
-            pushd $(shipctl get_resource_state "shipit_repo")
-              ./tagAndPushSvcs.sh drydock dry-dock dhDrydock.txt dry_dh_x86_64_Ubuntu_tag_push
-            popd
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./tagAndPushSvcs.sh drydock dry-dock dhDrydock.txt dry_dh_x86_64_Ubuntu_tag_push
+            - popd
 
   - name: ship_dh_x86_64_Ubuntu_tag_push
     type: runSh
@@ -159,10 +159,10 @@ jobs:
         switch: off
       - IN: rel_prod
       - TASK:
-        - script: |
-            pushd $(shipctl get_resource_state "shipit_repo")
-              ./tagAndPushSvcs.sh drydock shippable dhShippable.txt dry_dh_x86_64_Ubuntu_tag_push
-            popd
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./tagAndPushSvcs.sh drydock shippable dhShippable.txt dry_dh_x86_64_Ubuntu_tag_push
+            - popd
 
   - name: admiral_Ubuntu_14_04_tag_push
     type: runSh
@@ -179,10 +179,10 @@ jobs:
         switch: off
       - IN: rel_prod
       - TASK:
-        - script: |
-            pushd $(shipctl get_resource_state "shipit_repo")
-              ./tagAndPushAdmiralImageRepo.sh admiral_Ubuntu_14_04_tag_push
-            popd
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./tagAndPushAdmiralImageRepo.sh admiral_Ubuntu_14_04_tag_push
+            - popd
 
   ### Tagging repo services
   - name: gh_ship_repos_tag_push
@@ -206,10 +206,10 @@ jobs:
         switch: off
       - IN: rel_prod
       - TASK:
-        - script: |
-            pushd $(shipctl get_resource_state "shipit_repo")
-              ./tagAndPushSvcs.sh drydock shippable ghShippable.txt gh_ship_repos_tag_push true
-            popd
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./tagAndPushSvcs.sh drydock shippable ghShippable.txt gh_ship_repos_tag_push true
+            - popd
 
   ### Tagging ecr hosted services
   - name: ship_ecr_x86_64_Ubuntu_tag_push
@@ -245,7 +245,7 @@ jobs:
         switch: off
       - IN: rel_prod
       - TASK:
-        - script: |
-            pushd $(shipctl get_resource_state "shipit_repo")
-              ./tagAndPushSvcs.sh 374168611083.dkr.ecr.us-east-1.amazonaws.com shippable ecrShippable.txt ship_ecr_x86_64_Ubuntu_tag_push
-            popd
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./tagAndPushSvcs.sh 374168611083.dkr.ecr.us-east-1.amazonaws.com shippable ecrShippable.txt ship_ecr_x86_64_Ubuntu_tag_push
+            - popd
