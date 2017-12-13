@@ -4,6 +4,7 @@ export HUB_ORG=$1
 export GH_ORG=$2
 export SVCS_LIST=$3
 export CURR_JOB=$4
+export IMG_SKIP=$5
 export RES_GH_SSH="shipit_gh_ssh"
 export RES_VER="rel_prod"
 export UP_TAG_NAME="master"
@@ -135,7 +136,11 @@ process_services() {
     echo "============= End info for CONTEXT $CONTEXT======================"
     echo ""
 
-    pull_tag_image
+    if [ -z "$IMG_SKIP" ]
+    then
+      pull_tag_image
+    fi
+
     tag_push_repo
   done
 }

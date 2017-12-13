@@ -169,17 +169,44 @@ jobs:
     steps:
       - IN: shipit_repo
         switch: off
-      - IN: admiral_repo
-        switch: off
-      - IN: admiral_img
-        switch: off
       - IN: shipit_gh_ssh
         switch: off
       - IN: shipit_dh_cli
+        switch: off
+      - IN: admiral_repo
+        switch: off
+      - IN: admiral_img
         switch: off
       - IN: rel_prod
       - TASK:
         - script: |
             pushd $(shipctl get_resource_state "shipit_repo")
               ./tagAndPushAdmiralImageRepo.sh admiral_Ubuntu_14_04_tag_push
+            popd
+
+  ### Tagging repo services
+  - name: gh_ship_repos_tag_push
+    type: runSh
+    steps:
+      - IN: shipit_repo
+        switch: off
+      - IN: shipit_gh_ssh
+        switch: off
+      - IN: execTemplates_repo
+        switch: off
+      - IN: node_repo
+        switch: off
+      - IN: cexec_repo
+        switch: off
+      - IN: reqExec_repo
+        switch: off
+      - IN: reqProc_repo
+        switch: off
+      - IN: reqKick_repo
+        switch: off
+      - IN: rel_prod
+      - TASK:
+        - script: |
+            pushd $(shipctl get_resource_state "shipit_repo")
+              ./tagAndPushSvcs.sh drydock shippable ghShippable.txt gh_ship_repos_tag_push true
             popd
