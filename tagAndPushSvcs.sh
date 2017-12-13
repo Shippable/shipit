@@ -5,8 +5,8 @@ export GH_ORG=$2
 export SVCS_LIST=$3
 export CURR_JOB=$4
 export RES_GH_SSH="shipit_gh_ssh"
-export UP_TAG_NAME="master"
 export RES_VER="rel_prod"
+export UP_TAG_NAME="master"
 
 set_job_context() {
   eval `ssh-agent -s`
