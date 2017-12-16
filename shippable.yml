@@ -239,10 +239,10 @@ jobs:
         switch: off
       - IN: api_repo
         switch: off
-#      - IN: www_img
-#        switch: off
-#      - IN: www_repo
-#        switch: off
+      - IN: www_img
+        switch: off
+      - IN: www_repo
+        switch: off
       - IN: rel_prod
       - TASK:
           script:
