@@ -276,9 +276,22 @@ jobs:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
             - ./tagAndPushImage.sh genexec 374168611083.dkr.ecr.us-east-1.amazonaws.com rel_prod
+            - ./tagAndPushImage.sh genexec drydock rel_prod
             - popd
+
+  - name: reqProc_tag_push
+    type: runSh
+    steps:
+      - IN: shipit_repo
+        switch: off
+      - IN: shipit_dh_cli
+        switch: off
+      - IN: rel_prod
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagAndPushImage.sh genexec drydock rel_prod
+            - ./tagAndPushImage.sh reqproc drydock rel_prod
+            - ./tagAndPushImage.sh m10reqproc drydock rel_prod
+            - echo "This should run ./IN/config_repo/gitRepo/tagAndPushImage.sh w16reqproc drydock"
+            - ./tagAndPushImage.sh reqproc drydockaarch64 rel_prod
             - popd
