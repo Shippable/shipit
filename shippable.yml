@@ -20,6 +20,12 @@ resources:
     pointer:
       region: us-east-1
 
+  - name: shipit_bits_access_cli
+    type: cliConfig
+    integration: aws_bits_access
+    pointer:
+      region: us-east-1
+
 jobs:
   ### Tagging u16 services
   - name: dry_dh_x86_64_Ubuntu_tag_push
@@ -295,3 +301,22 @@ jobs:
             - echo "This should run ./IN/config_repo/gitRepo/tagAndPushImage.sh w16reqproc drydock"
             - ./tagAndPushImage.sh reqproc drydockaarch64 rel_prod
             - popd
+
+  - name: reqExec_tag_push
+    type: runSh
+    steps:
+      - IN: shipit_repo
+        switch: off
+      - IN: shipit_bits_access_cli
+        switch: off
+      - IN: rel_prod
+      - TASK:
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./tagReqExecArtifacts.sh x86_64 Ubuntu_16.04 rel_prod
+            - ./tagReqExecArtifacts.sh x86_64 Ubuntu_14.04 rel_prod
+            - ./tagReqExecArtifacts.sh x86_64 x86_64 CentOS_7 rel_prod
+            - ./tagReqExecArtifacts.sh x86_64 x86_64 macOS_10.12 rel_prod
+            - echo "This should run ./IN/config_repo/gitRepo/tagReqExecArtifacts.sh x86_64 WindowsServer_2016 rel_prod
+            - ./tagReqExecArtifacts.sh x86_64 aarch64 Ubuntu_16.04 rel_prod
+            - popd      
