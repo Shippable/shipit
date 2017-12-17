@@ -14,6 +14,12 @@ resources:
     type: cliConfig
     integration: ric03uec-dockerhub
 
+  - name: shipit_bits_cli
+    type: cliConfig
+    integration: ecr_bits_push
+    pointer:
+      region: us-east-1
+
 jobs:
   ### Tagging u16 services
   - name: dry_dh_x86_64_Ubuntu_tag_push
@@ -217,7 +223,7 @@ jobs:
     steps:
       - IN: shipit_repo
         switch: off
-      - IN: shipbits_ecr_v2_cli
+      - IN: shipit_bits_cli
         scopes:
           - ecr
         switch: off
@@ -248,4 +254,29 @@ jobs:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
             - ./tagAndPushSvcs.sh 374168611083.dkr.ecr.us-east-1.amazonaws.com shippable ecrShippable.txt ship_ecr_x86_64_Ubuntu_tag_push
+            - popd
+
+  - name: genexec_tag_push
+    type: runSh
+    steps:
+      - IN: shipit_repo
+        switch: off
+      - IN: genexec_img
+        switch: off
+      - IN: shipit_bits_cli
+        scopes:
+          - ecr
+        switch: off
+      - IN: shipit_dh_cli
+        switch: off
+      - IN: rel_prod
+      - TASK:
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./tagAndPushImage.sh genexec 374168611083.dkr.ecr.us-east-1.amazonaws.com rel_prod
+            - popd
+      - TASK:
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./tagAndPushImage.sh genexec drydock rel_prod
             - popd
