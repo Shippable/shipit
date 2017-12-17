@@ -258,6 +258,8 @@ jobs:
 
   - name: genexec_tag_push
     type: runSh
+    dependencyMode: strict
+    triggerMode: parallel
     steps:
       - IN: shipit_repo
         switch: off
