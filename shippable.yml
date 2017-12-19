@@ -330,22 +330,22 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-#      - IN: aarch64_microbase_img
-#        switch: off
-#      - IN: aarch64_microbase_repo
-#        switch: off
-#      - IN: aarch64_u16_img
-#        switch: off
-#      - IN: aarch64_u16_repo
-#        switch: off
-#      - IN: aarch64_u16pyt_img
-#        switch: off
-#      - IN: aarch64_u16pyt_repo
-#        switch: off
-#      - IN: aarch64_u16cpp_img
-#        switch: off
-#      - IN: aarch64_u16cpp_repo
-#        switch: off
+      - IN: aarch64_microbase_img
+        switch: off
+      - IN: aarch64_microbase_repo
+        switch: off
+      - IN: aarch64_u16_img
+        switch: off
+      - IN: aarch64_u16_repo
+        switch: off
+      - IN: aarch64_u16pyt_img
+        switch: off
+      - IN: aarch64_u16pyt_repo
+        switch: off
+      - IN: aarch64_u16cpp_img
+        switch: off
+      - IN: aarch64_u16cpp_repo
+        switch: off
       - IN: rel_prod
       - TASK:
           script:
