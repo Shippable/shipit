@@ -206,8 +206,8 @@ jobs:
         switch: off
       - IN: execTemplates_repo
         switch: off
-      - IN: node_repo
-        switch: off
+#      - IN: node_repo
+#        switch: off
 #      - IN: cexec_repo
 #        switch: off
       - IN: reqExec_repo
