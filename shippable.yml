@@ -208,8 +208,8 @@ jobs:
         switch: off
       - IN: node_repo
         switch: off
-      - IN: cexec_repo
-        switch: off
+#      - IN: cexec_repo
+#        switch: off
       - IN: reqExec_repo
         switch: off
       - IN: reqProc_repo
