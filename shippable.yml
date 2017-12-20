@@ -269,8 +269,8 @@ jobs:
     steps:
       - IN: shipit_repo
         switch: off
-#      - IN: genexec_img
-#        switch: off
+      - IN: genexec_img
+        switch: off
       - IN: shipit_bits_cli
         scopes:
           - ecr
