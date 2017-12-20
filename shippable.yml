@@ -239,10 +239,10 @@ jobs:
         switch: off
       - IN: mktg_repo
         switch: off
-#      - IN: micro_img
-#        switch: off
-#      - IN: micro_repo
-#        switch: off
+      - IN: micro_img
+        switch: off
+      - IN: micro_repo
+        switch: off
       - IN: nexec_img
         switch: off
       - IN: nexec_repo
