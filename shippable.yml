@@ -352,3 +352,22 @@ jobs:
             - pushd $(shipctl get_resource_state "shipit_repo")
             - ./tagAndPushSvcs.sh drydockaarch64 dry-dock-aarch64 dhAarch64.txt dry_dh_aarch_64_Ubuntu_tag_push
             - popd
+
+  - name: mktg_patch
+    type: runSh
+    steps:
+      - IN: shipit_repo
+        switch: off
+      - IN: shipit_bits_cli
+        scopes:
+          - ecr
+        switch: off
+      - IN: mktg_img
+        switch: off
+      - IN: rel_prod
+        switch: off
+      - TASK:
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./patchImage.sh mktg 374168611083.dkr.ecr.us-east-1.amazonaws.com rel_prod
+            - popd
