@@ -64,6 +64,11 @@ resources:
       params:
         secure: vmR5kHmceqFIKNoMgcx4cxCTQptaJ29V+YEQXqjVQ9gAMLzBxeSoO9+/ZPUgbO33sp291HG0k8Qrx/gbaKEGM6UufX9TTmlL8Yw/XahKjfx3ZWf2uKvNGN8aqBue2g8A/HSC0f9vt4Zf1oacRsrXof/9L5HWcKfoD5GJjezTHnpqHjWuYB0lz7ApzSKpGLi0n2yycjNTMPycwO5l0BCRGkNBj82ak3cUM98omN6+bB9cACTGvbcFgufaBFfa35SCtEDUZpn7OoZhk+T+1YmjP3EK+mgcEerA1zG7avSfFCQmBqI5M7xBoVG+CAQ4gF7RVXjxCpFseaBVS8jcvEC8CQ==
 
+  - name: shippable_version
+    type: version
+    seed:
+      versionName: "5.12.1"
+
 jobs:
   ### Tagging u16 services
   - name: dry_dh_x86_64_Ubuntu_tag_push
@@ -185,7 +190,7 @@ jobs:
         switch: off
       - IN: vault_repo
         switch: off
-      - IN: rel_prod
+      - IN: prod_release
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
@@ -207,7 +212,7 @@ jobs:
         switch: off
       - IN: microbase_repo
         switch: off
-      - IN: rel_prod
+      - IN: prod_release
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
@@ -229,7 +234,7 @@ jobs:
         switch: off
       - IN: admiral_img
         switch: off
-      - IN: rel_prod
+      - IN: prod_release
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
@@ -258,7 +263,7 @@ jobs:
         switch: off
       - IN: shipit_reqKick_repo
         switch: off
-      - IN: rel_prod
+      - IN: prod_release
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
@@ -299,7 +304,7 @@ jobs:
         switch: off
       - IN: www_repo
         switch: off
-      - IN: rel_prod
+      - IN: prod_release
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
@@ -321,12 +326,12 @@ jobs:
         switch: off
       - IN: shipit_dh_cli
         switch: off
-      - IN: rel_prod
+      - IN: prod_release
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagAndPushImage.sh genexec 374168611083.dkr.ecr.us-east-1.amazonaws.com rel_prod
-            - ./tagAndPushImage.sh genexec drydock rel_prod
+            - ./tagAndPushImage.sh genexec 374168611083.dkr.ecr.us-east-1.amazonaws.com prod_release
+            - ./tagAndPushImage.sh genexec drydock prod_release
             - popd
 
   - name: reqProc_tag_push
@@ -338,14 +343,14 @@ jobs:
         switch: off
       - IN: shipit_dh_cli
         switch: off
-      - IN: rel_prod
+      - IN: prod_release
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagAndPushImage.sh reqproc drydock rel_prod
-            - ./tagAndPushImage.sh m10reqproc drydock rel_prod
+            - ./tagAndPushImage.sh reqproc drydock prod_release
+            - ./tagAndPushImage.sh m10reqproc drydock prod_release
             - echo "This should run ./IN/config_repo/gitRepo/tagAndPushImage.sh w16reqproc drydock"
-            - ./tagAndPushImage.sh reqproc drydockaarch64 rel_prod
+            - ./tagAndPushImage.sh reqproc drydockaarch64 prod_release
             - popd
 
   - name: reqExec_tag_push
@@ -357,16 +362,16 @@ jobs:
         switch: off
       - IN: shipit_bits_access_cli
         switch: off
-      - IN: rel_prod
+      - IN: prod_release
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagReqExecArtifacts.sh x86_64 Ubuntu_16.04 rel_prod
-            - ./tagReqExecArtifacts.sh x86_64 Ubuntu_14.04 rel_prod
-            - ./tagReqExecArtifacts.sh x86_64 x86_64 CentOS_7 rel_prod
-            - ./tagReqExecArtifacts.sh x86_64 x86_64 macOS_10.12 rel_prod
-            - echo "This should run ./IN/config_repo/gitRepo/tagReqExecArtifacts.sh x86_64 WindowsServer_2016 rel_prod
-            - ./tagReqExecArtifacts.sh x86_64 aarch64 Ubuntu_16.04 rel_prod
+            - ./tagReqExecArtifacts.sh x86_64 Ubuntu_16.04 prod_release
+            - ./tagReqExecArtifacts.sh x86_64 Ubuntu_14.04 prod_release
+            - ./tagReqExecArtifacts.sh x86_64 x86_64 CentOS_7 prod_release
+            - ./tagReqExecArtifacts.sh x86_64 x86_64 macOS_10.12 prod_release
+            - echo "This should run ./IN/config_repo/gitRepo/tagReqExecArtifacts.sh x86_64 WindowsServer_2016 prod_release
+            - ./tagReqExecArtifacts.sh x86_64 aarch64 Ubuntu_16.04 prod_release
             - popd
 
   - name: dry_dh_aarch_64_Ubuntu_tag_push
@@ -396,7 +401,7 @@ jobs:
         switch: off
       - IN: aarch64_u16cpp_repo
         switch: off
-      - IN: rel_prod
+      - IN: prod_release
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
@@ -416,12 +421,12 @@ jobs:
         switch: off
       - IN: mktg_img
         switch: off
-      - IN: rel_prod
+      - IN: prod_release
         switch: off
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./patchImage.sh mktg 374168611083.dkr.ecr.us-east-1.amazonaws.com rel_prod
+            - ./patchImage.sh mktg 374168611083.dkr.ecr.us-east-1.amazonaws.com prod_release
             - popd
 
   - name: rc_deploy
@@ -453,3 +458,13 @@ jobs:
       - NOTIFY: slack_rc
     on_failure:
       - NOTIFY: slack_rc
+
+  - name: prod_release
+    type: release
+    steps:
+      - IN: shippable_version
+        switch: off
+      - IN: rc_deploy
+        switch: off
+      - TASK: managed
+        bump: patch

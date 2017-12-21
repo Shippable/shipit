@@ -6,7 +6,7 @@ export SVCS_LIST=$3
 export CURR_JOB=$4
 export IMG_SKIP=$5
 export RES_GH_SSH="shipit_gh_ssh"
-export RES_VER="rel_prod"
+export RES_VER="prod_release"
 export UP_TAG_NAME="master"
 
 set_job_context() {

@@ -8,7 +8,7 @@ export RES_GH_SSH="shipit_gh_ssh"
 export UP_TAG_NAME="master"
 export IMAGE_NAME="admiral"
 
-export RES_VER="rel_prod"
+export RES_VER="prod_release"
 export RES_VER_DATE=$(date +"%A, %b %d %Y")
 export RES_IMAGE="admiral_img"
 export RES_REPO="admiral_repo"
