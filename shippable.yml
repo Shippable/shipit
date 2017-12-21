@@ -26,6 +26,16 @@ resources:
     pointer:
       region: us-east-1
 
+  - name: shipit_rc_pem
+    type: integration
+    integration: aws-rc-pem
+
+  - name: shipit_rc_swarm
+    type: params
+    version:
+      params:
+        secure: vmR5kHmceqFIKNoMgcx4cxCTQptaJ29V+YEQXqjVQ9gAMLzBxeSoO9+/ZPUgbO33sp291HG0k8Qrx/gbaKEGM6UufX9TTmlL8Yw/XahKjfx3ZWf2uKvNGN8aqBue2g8A/HSC0f9vt4Zf1oacRsrXof/9L5HWcKfoD5GJjezTHnpqHjWuYB0lz7ApzSKpGLi0n2yycjNTMPycwO5l0BCRGkNBj82ak3cUM98omN6+bB9cACTGvbcFgufaBFfa35SCtEDUZpn7OoZhk+T+1YmjP3EK+mgcEerA1zG7avSfFCQmBqI5M7xBoVG+CAQ4gF7RVXjxCpFseaBVS8jcvEC8CQ==
+
 jobs:
   ### Tagging u16 services
   - name: dry_dh_x86_64_Ubuntu_tag_push
@@ -178,6 +188,8 @@ jobs:
 
   - name: admiral_Ubuntu_14_04_tag_push
     type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
     steps:
       - IN: shipit_repo
         switch: off
@@ -199,6 +211,8 @@ jobs:
   ### Tagging repo services
   - name: gh_ship_repos_tag_push
     type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
     steps:
       - IN: shipit_repo
         switch: off
@@ -226,6 +240,8 @@ jobs:
   ### Tagging ecr hosted services
   - name: ship_ecr_x86_64_Ubuntu_tag_push
     type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
     steps:
       - IN: shipit_repo
         switch: off
@@ -287,6 +303,8 @@ jobs:
 
   - name: reqProc_tag_push
     type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
     steps:
       - IN: shipit_repo
         switch: off
@@ -304,6 +322,8 @@ jobs:
 
   - name: reqExec_tag_push
     type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
     steps:
       - IN: shipit_repo
         switch: off
@@ -323,6 +343,8 @@ jobs:
 
   - name: dry_dh_aarch_64_Ubuntu_tag_push
     type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
     steps:
       - IN: shipit_repo
         switch: off
@@ -355,6 +377,8 @@ jobs:
 
   - name: mktg_patch
     type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
     steps:
       - IN: shipit_repo
         switch: off
@@ -371,3 +395,33 @@ jobs:
             - pushd $(shipctl get_resource_state "shipit_repo")
             - ./patchImage.sh mktg 374168611083.dkr.ecr.us-east-1.amazonaws.com rel_prod
             - popd
+
+  - name: rc_deploy
+    type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
+    on_start:
+      - NOTIFY: slack_rc
+    steps:
+      - IN: shipit_repo
+        switch: off
+      - IN: shipit_rc_pem
+        switch: off
+      - IN: shipit_rc_swarm
+        switch: off
+      - IN: baseami_patch
+      - IN: api_img
+      - IN: www_img
+      - IN: nexec_img
+      - IN: mktg_img
+      - IN: micro_img
+      - IN: admiral_img
+      - TASK:
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./deployRc.sh
+            - popd
+    on_success:
+      - NOTIFY: slack_rc
+    on_failure:
+      - NOTIFY: slack_rc
