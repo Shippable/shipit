@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 export CURR_JOB="rc_deploy"
-export RES_SWARM="aws_rc_swarm"
-export RES_PEM="aws_rc_pem"
+export RES_SWARM="shipit_rc_swarm"
+export RES_PEM="shipit_rc_pem"
 export DEPLOY_VERSION="master"
 
 export RES_SWARM_UP=$(echo $RES_SWARM | awk '{print toupper($0)}')
