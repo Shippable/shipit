@@ -13,6 +13,13 @@ resources:
       sourceName: shippable/reqKick
       branch: master
 
+  - name: shipit_reqProc_repo
+    type: gitRepo
+    integration: avinci_gh
+    pointer:
+      sourceName: shippable/reqProc
+      branch: master
+
   - name: shipit_gh_ssh
     type: integration
     integration: avi_gh_ssh
@@ -233,7 +240,7 @@ jobs:
         switch: off
       - IN: reqExec_repo
         switch: off
-      - IN: reqProc_repo
+      - IN: shipit_reqProc_repo
         switch: off
       - IN: shipit_reqKick_repo
         switch: off
