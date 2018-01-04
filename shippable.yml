@@ -368,10 +368,10 @@ jobs:
             - pushd $(shipctl get_resource_state "shipit_repo")
             - ./tagReqExecArtifacts.sh x86_64 Ubuntu_16.04 prod_release
             - ./tagReqExecArtifacts.sh x86_64 Ubuntu_14.04 prod_release
-            - ./tagReqExecArtifacts.sh x86_64 x86_64 CentOS_7 prod_release
-            - ./tagReqExecArtifacts.sh x86_64 x86_64 macOS_10.12 prod_release
+            - ./tagReqExecArtifacts.sh x86_64 CentOS_7 prod_release
+            - ./tagReqExecArtifacts.sh x86_64 macOS_10.12 prod_release
             - echo "This should run ./IN/config_repo/gitRepo/tagReqExecArtifacts.sh x86_64 WindowsServer_2016 prod_release"
-            - ./tagReqExecArtifacts.sh x86_64 aarch64 Ubuntu_16.04 prod_release
+            - ./tagReqExecArtifacts.sh aarch64 Ubuntu_16.04 prod_release
             - popd
 
   - name: dry_dh_aarch_64_Ubuntu_tag_push
