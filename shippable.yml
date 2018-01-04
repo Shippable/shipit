@@ -6,28 +6,28 @@ resources:
       sourceName: shippable/shipit
       branch: master
 
-  - name: shipit_reqKick_repo
+  - name: reqKick_repo
     type: gitRepo
     integration: avinci_gh
     pointer:
       sourceName: shippable/reqKick
       branch: master
 
-  - name: shipit_reqProc_repo
+  - name: reqProc_repo
     type: gitRepo
     integration: avinci_gh
     pointer:
       sourceName: shippable/reqProc
       branch: master
 
-  - name: shipit_reqExec_repo
+  - name: reqExec_repo
     type: gitRepo
     integration: avinci_gh
     pointer:
       sourceName: shippable/reqExec
       branch: master
 
-  - name: shipit_execTemplates_repo
+  - name: execTemplates_repo
     type: gitRepo
     integration: avinci_gh
     pointer:
@@ -251,17 +251,17 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: shipit_execTemplates_repo
+      - IN: execTemplates_repo
         switch: off
       - IN: node_repo
         switch: off
       - IN: cexec_repo
         switch: off
-      - IN: shipit_reqExec_repo
+      - IN: reqExec_repo
         switch: off
-      - IN: shipit_reqProc_repo
+      - IN: reqProc_repo
         switch: off
-      - IN: shipit_reqKick_repo
+      - IN: reqKick_repo
         switch: off
       - IN: prod_release
       - TASK:
