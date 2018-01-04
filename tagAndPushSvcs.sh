@@ -83,6 +83,11 @@ pull_tag_image() {
 tag_push_repo(){
   export SSH_PATH="git@github.com:$GH_ORG/$CONTEXT_REPO.git"
   export RES_REPO=$CONTEXT"_repo"
+
+  # the source repos resources for aarch64 have an extra string
+  if [[ $GH_ORG == *"aarch64"* ]]; then
+    export RES_REPO=aarch64_"$RES_REPO"
+  fi
   export RES_REPO_META=$(shipctl get_resource_meta $RES_REPO)
   export RES_REPO_STATE=$(shipctl get_resource_state $RES_REPO)
 
