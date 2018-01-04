@@ -67,7 +67,7 @@ resources:
   - name: shippable_version
     type: version
     seed:
-      versionName: "5.12.1"
+      versionName: "6.1.0"
 
 jobs:
   ### Tagging u16 services
