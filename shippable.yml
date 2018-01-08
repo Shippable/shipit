@@ -451,7 +451,7 @@ jobs:
     triggerMode: parallel
     dependencyMode: strict
     on_start:
-      - NOTIFY: slack_rc
+      - NOTIFY: rc_slack
     steps:
       - IN: shipit_repo
         switch: off
@@ -472,9 +472,9 @@ jobs:
             - ./deployRc.sh
             - popd
     on_success:
-      - NOTIFY: slack_rc
+      - NOTIFY: rc_slack
     on_failure:
-      - NOTIFY: slack_rc
+      - NOTIFY: rc_slack
 
   - name: prod_release
     type: release
