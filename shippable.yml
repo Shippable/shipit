@@ -69,6 +69,20 @@ resources:
     seed:
       versionName: "5.12.1"
 
+  - name: rc_slack
+    type: notification
+    integration: ship-slack
+    pointer:
+      recipients:
+        - "#rc"
+
+  - name: prod_slack
+    type: notification
+    integration: ship-slack
+    pointer:
+      recipients:
+        - "#prod"
+
 jobs:
   ### Tagging u16 services
   - name: dry_dh_x86_64_Ubuntu_tag_push
