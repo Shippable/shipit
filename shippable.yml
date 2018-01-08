@@ -6,28 +6,28 @@ resources:
       sourceName: shippable/shipit
       branch: master
 
-  - name: shipit_reqKick_repo
+  - name: reqKick_repo
     type: gitRepo
     integration: avinci_gh
     pointer:
       sourceName: shippable/reqKick
       branch: master
 
-  - name: shipit_reqProc_repo
+  - name: reqProc_repo
     type: gitRepo
     integration: avinci_gh
     pointer:
       sourceName: shippable/reqProc
       branch: master
 
-  - name: shipit_reqExec_repo
+  - name: reqExec_repo
     type: gitRepo
     integration: avinci_gh
     pointer:
       sourceName: shippable/reqExec
       branch: master
 
-  - name: shipit_execTemplates_repo
+  - name: execTemplates_repo
     type: gitRepo
     integration: avinci_gh
     pointer:
@@ -67,7 +67,7 @@ resources:
   - name: shippable_version
     type: version
     seed:
-      versionName: "5.12.1"
+      versionName: "6.1.0"
 
   - name: rc_slack
     type: notification
@@ -265,17 +265,17 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: shipit_execTemplates_repo
+      - IN: execTemplates_repo
         switch: off
       - IN: node_repo
         switch: off
       - IN: cexec_repo
         switch: off
-      - IN: shipit_reqExec_repo
+      - IN: reqExec_repo
         switch: off
-      - IN: shipit_reqProc_repo
+      - IN: reqProc_repo
         switch: off
-      - IN: shipit_reqKick_repo
+      - IN: reqKick_repo
         switch: off
       - IN: prod_release
       - TASK:
@@ -382,16 +382,19 @@ jobs:
             - pushd $(shipctl get_resource_state "shipit_repo")
             - ./tagReqExecArtifacts.sh x86_64 Ubuntu_16.04 prod_release
             - ./tagReqExecArtifacts.sh x86_64 Ubuntu_14.04 prod_release
-            - ./tagReqExecArtifacts.sh x86_64 x86_64 CentOS_7 prod_release
-            - ./tagReqExecArtifacts.sh x86_64 x86_64 macOS_10.12 prod_release
-            - echo "This should run ./IN/config_repo/gitRepo/tagReqExecArtifacts.sh x86_64 WindowsServer_2016 prod_release
-            - ./tagReqExecArtifacts.sh x86_64 aarch64 Ubuntu_16.04 prod_release
+            - ./tagReqExecArtifacts.sh x86_64 CentOS_7 prod_release
+            - ./tagReqExecArtifacts.sh x86_64 macOS_10.12 prod_release
+            - echo "This should run ./IN/config_repo/gitRepo/tagReqExecArtifacts.sh x86_64 WindowsServer_2016 prod_release"
+            - ./tagReqExecArtifacts.sh aarch64 Ubuntu_16.04 prod_release
             - popd
 
   - name: dry_dh_aarch_64_Ubuntu_tag_push
     type: runSh
     triggerMode: parallel
     dependencyMode: strict
+    runtime:
+      architecture: aarch64
+      os: Ubuntu_16.04
     steps:
       - IN: shipit_repo
         switch: off
