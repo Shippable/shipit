@@ -481,7 +481,7 @@ jobs:
     steps:
       - IN: shippable_version
         switch: off
-      - IN: rc_deploy
+      - IN: bvt
         switch: off
       - TASK: managed
         bump: patch
