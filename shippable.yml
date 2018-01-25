@@ -56,7 +56,7 @@ resources:
 
   - name: shipit_rc_pem
     type: integration
-    integration: aws-rc-ssh
+    integration: aws-rc-deploy
 
     #integration: aws-rc-pem
 
