@@ -68,9 +68,6 @@ configure_node_creds() {
 pull_admiral_repo() {
   echo "Pull admiral-repo started"
   local PULL_CMD="git -C /home/ubuntu/admiral pull origin master"
-  ssh-add -l
-  ssh $BASTION_USER@$BASTION_IP "ls -atlh"
-  ssh $BASTION_USER@$BASTION_IP "echo testing"
   ssh -A $BASTION_USER@$BASTION_IP ssh $SWARM_USER@$SWARM_IP "$PULL_CMD"
   echo "Successfully pulled admiral-repo"
 }
