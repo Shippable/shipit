@@ -56,9 +56,7 @@ resources:
 
   - name: shipit_rc_pem
     type: integration
-    integration: aws-rc-deploy
-
-    #integration: aws-rc-pem
+    integration: aws-rc-pem
 
   - name: shipit_rc_swarm
     type: params
