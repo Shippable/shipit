@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 export CURR_JOB="$1"
-export HUB_ORG="drydock"
+export HUB_ORG="374168611083.dkr.ecr.us-east-1.amazonaws.com"
 export GH_ORG="Shippable"
 export RES_GH_SSH="shipit_gh_ssh"
 
@@ -68,7 +68,6 @@ pull_tag_image() {
   echo "Pushing $PUSH_IMG"
   sudo docker push $PUSH_IMG
   echo "Completed Docker tag & push for $PUSH_IMG"
-
 
   echo "Pushing $PUSH_LAT_IMG"
   sudo docker push $PUSH_LAT_IMG
