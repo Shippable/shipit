@@ -346,6 +346,7 @@ jobs:
             - pushd $(shipctl get_resource_state "shipit_repo")
             - ./tagAndPushImage.sh genexec 374168611083.dkr.ecr.us-east-1.amazonaws.com prod_release
             - ./tagAndPushImage.sh genexec drydock prod_release
+            - ./tagAndPushImage.sh genexec drydockaarch64 prod_release
             - popd
 
   - name: reqProc_tag_push
