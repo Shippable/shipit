@@ -53,9 +53,7 @@ Function pull_tag_image() {
 
 Function create_out_state() {
   echo "Creating a state file for $CURR_JOB"
-  $versionString = "versionName={0}" -f $RES_VER_NAME
-  $outFile = Join-Path "$JOBSTATE" "$CURR_JOB.env"
-  $versionString | Out-File $outFile
+  shipctl post_resource_state $CURR_JOB "versionName" $RES_VER_NAME
 }
 
 Function main() {
