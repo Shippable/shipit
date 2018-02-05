@@ -1,7 +1,3 @@
-gitlab
-rabbitmq
-redis
-vault
 u16
 u16all
 u16nodall
