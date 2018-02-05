@@ -1,3 +1,8 @@
+api
+micro
+mktg
+nexec
+www
 postgres
 gitlab
 rabbitmq
