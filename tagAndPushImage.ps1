@@ -8,7 +8,10 @@ $IMAGE_NAME = $CONTEXT
 $CURR_JOB = "{0}_tag_push" -f $CONTEXT
 $RES_IMAGE = "{0}_img" -f $CONTEXT
 $UP_TAG_NAME = "master"
-$RES_VER_NAME = $(shipctl get_resource_version_name $RES_VER)
+
+# TODO: replace this with get_resource_version_name once shipctl bug if fixed
+$RES_ENV_KEY = $(shipctl _get_key_name $RES_VER "VERSIONNAME")
+$RES_VER_NAME = $(shipctl _get_env_value $RES_ENV_KEY)
 
 $PULL_IMG = "{0}/{1}:{2}" -f $HUB_ORG, $IMAGE_NAME, $UP_TAG_NAME
 $PUSH_IMG = "{0}/{1}:{2}" -f $HUB_ORG, $IMAGE_NAME, $RES_VER_NAME
