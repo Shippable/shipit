@@ -146,7 +146,7 @@ process_services() {
       pull_tag_image
     fi
 
-    tag_push_repo
+    #tag_push_repo
   done
 }
 
