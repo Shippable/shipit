@@ -184,22 +184,6 @@ jobs:
         switch: off
       - IN: u14cppall_repo
         switch: off
-      - IN: gitlab_img
-        switch: off
-      - IN: gitlab_repo
-        switch: off
-      - IN: rabbitmq_img
-        switch: off
-      - IN: rabbitmq_repo
-        switch: off
-      - IN: redis_img
-        switch: off
-      - IN: redis_repo
-        switch: off
-      - IN: vault_img
-        switch: off
-      - IN: vault_repo
-        switch: off
       - IN: prod_release
       - TASK:
           script:
@@ -319,6 +303,22 @@ jobs:
       - IN: postgres_img
         switch: off
       - IN: postgres_repo
+        switch: off
+      - IN: gitlab_img
+        switch: off
+      - IN: gitlab_repo
+        switch: off
+      - IN: rabbitmq_img
+        switch: off
+      - IN: rabbitmq_repo
+        switch: off
+      - IN: redis_img
+        switch: off
+      - IN: redis_repo
+        switch: off
+      - IN: vault_img
+        switch: off
+      - IN: vault_repo
         switch: off
       - IN: prod_release
       - TASK:
