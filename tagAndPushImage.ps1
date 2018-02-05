@@ -34,7 +34,7 @@ Function set_context() {
 
 Function pull_tag_image() {
   echo "Starting Docker tag and push for $IMAGE_NAME"
-  #docker pull "$PULL_IMG"
+  docker pull "$PULL_IMG"
 
   echo "Tagging $PUSH_IMG"
   docker tag "$PULL_IMG" "$PUSH_IMG"
