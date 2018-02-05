@@ -188,10 +188,6 @@ jobs:
         switch: off
       - IN: gitlab_repo
         switch: off
-      - IN: postgres_img
-        switch: off
-      - IN: postgres_repo
-        switch: off
       - IN: rabbitmq_img
         switch: off
       - IN: rabbitmq_repo
@@ -319,6 +315,10 @@ jobs:
       - IN: www_img
         switch: off
       - IN: www_repo
+        switch: off
+      - IN: postgres_img
+        switch: off
+      - IN: postgres_repo
         switch: off
       - IN: prod_release
       - TASK:
