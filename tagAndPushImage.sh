@@ -9,9 +9,7 @@ export CURR_JOB=$CONTEXT"_tag_push"
 export RES_IMAGE=$CONTEXT"_img"
 export UP_TAG_NAME="master"
 
-# TODO: replace this with get_resource_version_name once shipctl bug if fixed
-$RES_ENV_KEY = $(shipctl _get_key_name $RES_VER "VERSIONNAME")
-$RES_VER_NAME = $(shipctl _get_env_value $RES_ENV_KEY)
+export RES_VER_NAME=$(shipctl get_resource_version_name $RES_VER)
 
 set_context() {
   export PULL_IMG=$HUB_ORG/$IMAGE_NAME:$UP_TAG_NAME
