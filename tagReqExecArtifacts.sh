@@ -4,17 +4,19 @@
 export ARCHITECTURE="$1"
 export OS="$2"
 export RES_VER=$3
+export ARCHIVE_EXTENSION=$4
+
 export ARTIFACTS_BUCKET="s3://shippable-artifacts"
 
 export RES_VER_NAME=$(shipctl get_resource_version_name $RES_VER)
 
 # Source path
 export FROM_VERSION=master
-export S3_BUCKET_FROM_PATH="$ARTIFACTS_BUCKET/reqExec/$FROM_VERSION/reqExec-$FROM_VERSION-$ARCHITECTURE-$OS.tar.gz"
+export S3_BUCKET_FROM_PATH="$ARTIFACTS_BUCKET/reqExec/$FROM_VERSION/reqExec-$FROM_VERSION-$ARCHITECTURE-$OS.$ARCHIVE_EXTENSION"
 
 # Destination path
 export TO_VERSION="$RES_VER_NAME"
-export S3_BUCKET_TO_PATH="$ARTIFACTS_BUCKET/reqExec/$TO_VERSION/reqExec-$TO_VERSION-$ARCHITECTURE-$OS.tar.gz"
+export S3_BUCKET_TO_PATH="$ARTIFACTS_BUCKET/reqExec/$TO_VERSION/reqExec-$TO_VERSION-$ARCHITECTURE-$OS.$ARCHIVE_EXTENSION"
 
 check_input() {
   if [ -z "$ARCHITECTURE" ]; then
