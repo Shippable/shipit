@@ -485,7 +485,6 @@ jobs:
 
   - name: rc_deploy
     type: runSh
-    triggerMode: parallel
     dependencyMode: strict
     on_start:
       - NOTIFY: rc_slack
