@@ -325,6 +325,7 @@ jobs:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
             - ./tagAndPushSvcs.sh 374168611083.dkr.ecr.us-east-1.amazonaws.com shippable ecrShippable.txt ship_ecr_x86_64_Ubuntu_tag_push
+            - ./tagAndPushSvcs.sh 374168611083.dkr.ecr.us-east-1.amazonaws.com dry-dock ecrDrydock.txt ship_ecr_x86_64_Ubuntu_tag_push
             - popd
 
   - name: genexec_tag_push

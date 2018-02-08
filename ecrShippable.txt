@@ -3,8 +3,3 @@ micro
 mktg
 nexec
 www
-postgres
-gitlab
-rabbitmq
-redis
-vault
