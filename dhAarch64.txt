@@ -3,5 +3,6 @@ u16
 u16all
 u16nodall
 u16cppall
+u16pytall
 u16pyt
 u16cpp
