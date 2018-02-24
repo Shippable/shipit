@@ -20,3 +20,6 @@ u14scaall
 u14ruball
 u14phpall
 u14cppall
+c7
+c7all
+c7nodall
