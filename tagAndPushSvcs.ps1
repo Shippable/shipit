@@ -23,7 +23,7 @@ Function exec_exe([string]$cmd) {
 }
 
 Function set_job_context() {
-  $RES_VER_NAME = $(shipctl get_resource_version_name $RES_VER)
+  $script:RES_VER_NAME = $(shipctl get_resource_version_name $RES_VER)
 
   echo ""
   echo "============= Begin info for JOB $CURR_JOB======================"
@@ -90,20 +90,20 @@ Function pull_tag_image() {
   echo ""
 
   echo "Starting Docker tag and push for $IMAGE_NAME"
-  exec_exe docker pull $PULL_IMG
+  exec_exe "docker pull $PULL_IMG"
 
   echo "Tagging $PUSH_IMG"
-  exec_exe docker tag $PULL_IMG $PUSH_IMG
+  exec_exe "docker tag $PULL_IMG $PUSH_IMG"
 
   echo "Tagging $PUSH_LAT_IMG"
-  exec_exe docker tag $PULL_IMG $PUSH_LAT_IMG
+  exec_exe "docker tag $PULL_IMG $PUSH_LAT_IMG"
 
   echo "Pushing $PUSH_IMG"
-  exec_exe docker push $PUSH_IMG
+  exec_exe "docker push $PUSH_IMG"
   echo "Completed Docker tag & push for $PUSH_IMG"
 
   echo "Pushing $PUSH_LAT_IMG"
-  exec_exe docker push $PUSH_LAT_IMG
+  exec_exe "docker push $PUSH_LAT_IMG"
   echo "Completed Docker tag & push for $PUSH_LAT_IMG"
 
   echo "Completed Docker tag and push for $IMAGE_NAME"
@@ -131,25 +131,25 @@ Function tag_push_repo() {
   popd
 
   pushd $RES_REPO_STATE
-    exec_exe git remote add up $SSH_PATH
-    exec_exe git remote -v
-    exec_exe git checkout master
+    exec_exe "git remote add up $SSH_PATH"
+    exec_exe "git remote -v"
+    exec_exe "git checkout master"
 
-    exec_exe git pull --tags
-    exec_exe git checkout $IMG_REPO_COMMIT_SHA
+    exec_exe "git pull --tags"
+    exec_exe "git checkout $IMG_REPO_COMMIT_SHA"
 
     $global:LASTEXITCODE = 0;
     Invoke-Expression "git tag -d $RES_VER_NAME"
     $ret = $LASTEXITCODE
     if ($ret -eq 0) {
       echo "Removing existing tag"
-      exec_exe git push --delete up $RES_VER_NAME
+      exec_exe "git push --delete up $RES_VER_NAME"
     }
 
     echo "Tagging repo with $RES_VER_NAME"
-    exec_exe git tag $RES_VER_NAME
+    exec_exe "git tag $RES_VER_NAME"
     echo "Pushing tag $RES_VER_NAME"
-    exec_exe git push up $RES_VER_NAME
+    exec_exe "git push up $RES_VER_NAME"
   popd
 
   shipctl put_resource_state $CURR_JOB $CONTEXT"_COMMIT_SHA" $IMG_REPO_COMMIT_SHA
