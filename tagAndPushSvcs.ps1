@@ -1,4 +1,4 @@
-``$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Stop"
 
 $HUB_ORG = "$($args[0])"
 $GH_ORG = "$($args[1])"
