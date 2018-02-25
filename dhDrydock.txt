@@ -23,3 +23,6 @@ u14cppall
 c7
 c7all
 c7nodall
+c7javall
+c7pytall
+c7cppall
