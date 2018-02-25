@@ -1,0 +1,3 @@
+w16
+w16dotnetcore
+w16aspnetcore
