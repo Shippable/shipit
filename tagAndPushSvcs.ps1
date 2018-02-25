@@ -173,7 +173,8 @@ Function process_services() {
       pull_tag_image
     }
 
-    tag_push_repo
+    # TODO: uncomment after fixing https://github.com/Shippable/heap/issues/2077
+    #tag_push_repo
   }
 }
 
