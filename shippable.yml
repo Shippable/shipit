@@ -558,6 +558,8 @@ jobs:
       switch: off
     - IN: w16_img
       switch: off
+    - IN: w16_repo
+      switch: off
     - IN: prod_release
     - TASK:
         script:
