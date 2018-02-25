@@ -45,7 +45,29 @@ Function add_ssh_key() {
   pushd $(shipctl get_resource_meta $RES_GH_SSH)
     echo "Extracting GH SSH Key"
     echo "-----------------------------------"
-    # TODO: Add SSH key for accessing github
+
+    $integration = Get-Content 'integration.json' | Out-String | ConvertFrom-Json
+    ssh_keyfile_path = Join-Path $env:TEMP id_rsa
+    [IO.File]::WriteAllLines($ssh_keyfile_path, $integration.privateKey)
+
+    start-sshagent
+    add-sshkey -D
+    add-sshkey $ssh_keyfile_path
+
+    $ssh_dir = Join-Path "$global:HOME" ".ssh"
+    if (Test-Path $ssh_dir) {
+      echo "----> Removing $ssh_dir"
+      Remove-Item -Force -Recurse $ssh_dir
+    }
+    echo "Writing $global:HOME\.ssh\config file"
+    $ssh_config_file_path = Join-Path "$ssh_dir" "config"
+    $ssh_config_content = @'
+Host *
+    StrictHostKeyChecking no
+'@
+    mkdir $ssh_dir
+    [IO.File]::WriteAllLines($ssh_config_file_path, $ssh_config_content)
+
     echo "Completed Extracting GH SSH Key"
     echo "-----------------------------------"
   popd
