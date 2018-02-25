@@ -559,8 +559,8 @@ jobs:
     - IN: w16_img
       switch: off
     - IN: prod_release
-      - TASK:
-          script:
-            - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagAndPushSvcs.ps1 drydock dry-dock dhDrydockWindows.txt dry_dh_x86_64_Windows_tag_push
-            - popd
+    - TASK:
+        script:
+          - pushd $(shipctl get_resource_state "shipit_repo")
+          - ./tagAndPushSvcs.ps1 drydock dry-dock dhDrydockWindows.txt dry_dh_x86_64_Windows_tag_push
+          - popd
