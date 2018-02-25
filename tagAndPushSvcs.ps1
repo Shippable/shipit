@@ -23,7 +23,7 @@ Function exec_exe([string]$cmd) {
 }
 
 Function set_job_context() {
-  $RES_VER_NAME = $(shipctl get_resource_version_name $RES_VER)
+  $script:RES_VER_NAME = $(shipctl get_resource_version_name $RES_VER)
 
   echo ""
   echo "============= Begin info for JOB $CURR_JOB======================"
