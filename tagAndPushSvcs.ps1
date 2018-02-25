@@ -47,7 +47,7 @@ Function add_ssh_key() {
     echo "-----------------------------------"
 
     $integration = Get-Content 'integration.json' | Out-String | ConvertFrom-Json
-    ssh_keyfile_path = Join-Path $env:TEMP id_rsa
+    $ssh_keyfile_path = Join-Path $env:TEMP id_rsa
     [IO.File]::WriteAllLines($ssh_keyfile_path, $integration.privateKey)
 
     start-sshagent
