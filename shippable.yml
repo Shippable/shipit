@@ -560,6 +560,14 @@ jobs:
       switch: off
     - IN: w16_repo
       switch: off
+    - IN: w16dotnetcore_img
+      switch: off
+    - IN: w16dotnetcore_repo
+      switch: off
+    - IN: w16aspnetcore_img
+      switch: off
+    - IN: w16aspnetcore_repo
+      switch: off
     - IN: prod_release
     - TASK:
         script:
