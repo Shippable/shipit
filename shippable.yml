@@ -479,6 +479,22 @@ jobs:
         switch: off
       - IN: aarch64_u16_repo
         switch: off
+      - IN: aarch64_u16all_img
+        switch: off
+      - IN: aarch64_u16all_repo
+        switch: off
+      - IN: aarch64_u16nodall_img
+        switch: off
+      - IN: aarch64_u16nodall_repo
+        switch: off
+      - IN: aarch64_u16cppall_img
+        switch: off
+      - IN: aarch64_u16cppall_repo
+        switch: off
+      - IN: aarch64_u16pytall_img
+        switch: off
+      - IN: aarch64_u16pytall_repo
+        switch: off
       - IN: aarch64_u16pyt_img
         switch: off
       - IN: aarch64_u16pyt_repo
