@@ -184,6 +184,18 @@ jobs:
         switch: off
       - IN: u14cppall_repo
         switch: off
+      - IN: c7_repo
+        switch: off
+      - IN: c7all_repo
+        switch: off
+      - IN: c7nodall_repo
+        switch: off
+      - IN: c7pytall_repo
+        switch: off
+      - IN: c7javall_repo
+        switch: off
+      - IN: c7cppall_repo
+        switch: off
       - IN: prod_release
       - TASK:
           script:
