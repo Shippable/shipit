@@ -62,8 +62,7 @@ resources:
     type: params
     version:
       params:
-        secure: elc/bfoHO3QXua1Gk27KnWjJFS+IUx9qRbFxt8aI152rdKSI2W/QXmhyxHh6pTOiSbVLwyISUJdRQwJJkZtixQ2kd5IuwXUG7h9VscfwWUqUJHbbwJKiBKSq+4ri6YIrG5rNIRLbUSycBvrcnD9HWYuN9XOcDVaqmXLDgADkSOQWk1qGKcn2sha+yJe3xuUMImSJGZQJLccGyCxZsUfrsvzo5FYn+7zRyxYfDSLMVPht5uEplpIrwxftXclxD/oXKX5M0ioZzbalbrA03UXVhyAxt8vix0OjMbRenSua0/iwjmnbT9potfjLF4umWBSTMpIFvVwym73l4HJmFo1agA==
-
+        secure: yleB/65do/f3q/8a6aLhb1Bcoxijdvr4FaRDcHAuS2trncoer69KMi5Rbx9T79HZ8ygKG1gtJ9idG49C3sfK1XTbDtrIeerCLeLM9pL9+fe13s40P7pkhobTaqUnUPVKKd9Hg8yjAJFxofYsDF6bYicIMeXDn8E3VvvCIoNGaRaIRA9LxkKwWRaRd5Oy5mpDZ0infcNv3o1RthppTmSktBwZMEO0x9Cuto55y7h18PFnHGS/SzPKJcM3Tgmwui0InUO0RPzKy0pVGFmKmC8lIgpV5Pt51zOnXPo+hX6fgi4xdDIe016HPHyoW3s4qb0kIJIyx5xLzYCbEUx84uUzGQ==
   - name: shippable_version
     type: version
     seed:
