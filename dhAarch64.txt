@@ -1,8 +1,8 @@
-microbase
-u16
-u16all
-u16nodall
-u16cppall
-u16pytall
-u16pyt
-u16cpp
+aarch64_microbase
+aarch64_u16
+aarch64_u16all
+aarch64_u16nodall
+aarch64_u16cppall
+aarch64_u16pytall
+aarch64_u16pyt
+aarch64_u16cpp
