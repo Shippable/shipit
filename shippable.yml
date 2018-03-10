@@ -506,7 +506,7 @@ jobs:
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagAndPushSvcs.sh drydockaarch64 dry-dock-aarch64 dhAarch64.txt dry_dh_aarch_64_Ubuntu_tag_push
+            - ./tagAndPushSvcs.sh drydock dry-dock dhAarch64.txt dry_dh_aarch_64_Ubuntu_tag_push
             - popd
 
   - name: mktg_patch
