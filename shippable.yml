@@ -235,9 +235,9 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: microbase_img
+      - IN: u16microbase_img
         switch: off
-      - IN: microbase_repo
+      - IN: u16microbase_repo
         switch: off
       - IN: prod_release
       - TASK:
@@ -259,15 +259,39 @@ jobs:
         scopes:
           - ecr
         switch: off
-      - IN: admiral_repo
+      - IN: u14admiral_repo
         switch: off
-      - IN: admiral_img
+      - IN: u14admiral_img
         switch: off
       - IN: prod_release
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagAndPushAdmiralImageRepo.sh admiral_Ubuntu_14_04_tag_push
+            - ./tagAndPushAdmiralImageRepo.sh admiral_Ubuntu_14_04_tag_push u14admiral
+            - popd
+
+  - name: admiral_Ubuntu_16_04_tag_push
+    type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
+    steps:
+      - IN: shipit_repo
+        switch: off
+      - IN: shipit_gh_ssh
+        switch: off
+      - IN: shipit_bits_cli
+        scopes:
+          - ecr
+        switch: off
+      - IN: u16admiral_repo
+        switch: off
+      - IN: u16admiral_img
+        switch: off
+      - IN: prod_release
+      - TASK:
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./tagAndPushAdmiralImageRepo.sh admiral_Ubuntu_16_04_tag_push u16admiral
             - popd
 
   ### Tagging repo services
@@ -382,7 +406,6 @@ jobs:
             - pushd $(shipctl get_resource_state "shipit_repo")
             - ./tagAndPushImage.sh genexec 374168611083.dkr.ecr.us-east-1.amazonaws.com prod_release
             - ./tagAndPushImage.sh genexec drydock prod_release
-            - ./tagAndPushImage.sh genexec drydockaarch64 prod_release
             - popd
 
   - name: reqProc_tag_push
@@ -398,9 +421,10 @@ jobs:
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagAndPushImage.sh reqproc drydock prod_release
+            - ./tagAndPushImage.sh u16reqproc drydock prod_release
+            - ./tagAndPushImage.sh u14reqproc drydock prod_release
             - ./tagAndPushImage.sh m10reqproc drydock prod_release
-            - ./tagAndPushImage.sh reqproc drydockaarch64 prod_release
+            - ./tagAndPushImage.sh aarch64_u16reqproc drydock prod_release
             - popd
 
   - name: reqProc_tag_push_w16
@@ -492,9 +516,9 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: aarch64_microbase_img
+      - IN: aarch64_u16microbase_img
         switch: off
-      - IN: aarch64_microbase_repo
+      - IN: aarch64_u16microbase_repo
         switch: off
       - IN: aarch64_u16_img
         switch: off
@@ -570,7 +594,7 @@ jobs:
       - IN: nexec_img
       - IN: mktg_img
       - IN: micro_img
-      - IN: admiral_img
+      - IN: u16admiral_img
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")

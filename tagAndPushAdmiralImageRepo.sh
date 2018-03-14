@@ -6,11 +6,11 @@ export GH_ORG="Shippable"
 export RES_GH_SSH="shipit_gh_ssh"
 
 export UP_TAG_NAME="master"
-export IMAGE_NAME="admiral"
+export IMAGE_NAME="$2"
 
 export RES_VER="prod_release"
 export RES_VER_DATE=$(date +"%A, %b %d %Y")
-export RES_IMAGE="admiral_img"
+export RES_IMAGE=$2"_img"
 export RES_REPO="admiral_repo"
 export SSH_PATH="git@github.com:$GH_ORG/admiral.git"
 
