@@ -66,7 +66,7 @@ resources:
   - name: shippable_version
     type: version
     seed:
-      versionName: "6.2.1"
+      versionName: "6.3.1"
 
   - name: rc_slack
     type: notification
@@ -267,7 +267,7 @@ jobs:
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagAndPushAdmiralImageRepo.sh admiral_Ubuntu_14_04_tag_push u14admiral
+            - ./tagAndPushAdmiralImageRepo.sh admiral_Ubuntu_14_04_tag_push u14admiral skipRepoTag
             - popd
 
   - name: admiral_Ubuntu_16_04_tag_push
@@ -594,7 +594,7 @@ jobs:
       - IN: nexec_img
       - IN: mktg_img
       - IN: micro_img
-      - IN: u16admiral_img
+      - IN: u14admiral_img #change to 16 if we upgrade rc
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")

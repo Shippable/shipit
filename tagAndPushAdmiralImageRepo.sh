@@ -7,6 +7,7 @@ export RES_GH_SSH="shipit_gh_ssh"
 
 export UP_TAG_NAME="master"
 export IMAGE_NAME="$2"
+export SKIP_REPO_TAG="$3"
 
 export RES_VER="prod_release"
 export RES_VER_DATE=$(date +"%A, %b %d %Y")
@@ -77,6 +78,9 @@ pull_tag_image() {
 }
 
 tag_push_repo() {
+  if [ -n "$SKIP_REPO_TAG" ]; then
+    return
+  fi
   pushd $(shipctl get_resource_state $RES_REPO)
     git remote add up $SSH_PATH
     git remote -v
@@ -117,7 +121,9 @@ tag_push_repo() {
 create_out_state() {
   echo "Creating a state file for $CURR_JOB"
   echo versionName=$RES_VER_NAME > "$JOB_STATE/$CURR_JOB.env"
-  echo IMG_REPO_COMMIT_SHA=$IMG_REPO_COMMIT_SHA >> "$JOB_STATE/$CURR_JOB.env"
+  if [ -z "$SKIP_REPO_TAG" ]; then
+    echo IMG_REPO_COMMIT_SHA=$IMG_REPO_COMMIT_SHA >> "$JOB_STATE/$CURR_JOB.env"
+  fi
 }
 
 main() {
