@@ -12,7 +12,7 @@ export SKIP_REPO_TAG="$3"
 export RES_VER="prod_release"
 export RES_VER_DATE=$(date +"%A, %b %d %Y")
 export RES_IMAGE=$2"_img"
-export RES_REPO="admiral_repo"
+export RES_REPO=$2"_repo"
 export SSH_PATH="git@github.com:$GH_ORG/admiral.git"
 
 export RES_VER_NAME=$(shipctl get_resource_version_name $RES_VER)
