@@ -565,6 +565,8 @@ jobs:
   - name: rc_deploy
     type: runSh
     dependencyMode: strict
+    runtime:
+      timeoutMinutes: 15
     on_start:
       - NOTIFY: rc_slack
     steps:
@@ -582,6 +584,7 @@ jobs:
       - IN: micro_img
       - IN: u14admiral_img #change to 16 if we upgrade rc
       - TASK:
+          name: deploy_to_rc
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
             - ./deployRc.sh
