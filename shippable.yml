@@ -582,7 +582,7 @@ jobs:
       - IN: nexec_img
       - IN: mktg_img
       - IN: micro_img
-      - IN: u14admiral_img #change to 16 if we upgrade rc
+      - IN: u16admiral_img
       - TASK:
           name: deploy_to_rc
           script:
