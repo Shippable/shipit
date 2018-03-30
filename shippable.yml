@@ -66,7 +66,7 @@ resources:
   - name: shippable_version
     type: version
     seed:
-      versionName: "6.3.1"
+      versionName: "6.3.3"
 
   - name: rc_slack
     type: notification
@@ -580,7 +580,7 @@ jobs:
       - IN: nexec_img
       - IN: mktg_img
       - IN: micro_img
-      - IN: u14admiral_img #change to 16 if we upgrade rc
+      - IN: u16admiral_img
       - TASK:
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
