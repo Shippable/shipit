@@ -583,12 +583,27 @@ jobs:
       - IN: mktg_img
       - IN: micro_img
       - IN: u16admiral_img
+      - IN: shipit_bits_cli
+        scopes:
+          - ecr
+        switch: off
       - TASK:
           name: deploy_to_rc
           script:
             - pushd $(shipctl get_resource_state "shipit_repo")
             - ./deployRc.sh
             - popd
+      - TASK:
+          name: cleanup_untagged_images
+          script:
+            - |
+              repositories=$(aws ecr describe-repositories --output text | awk '{print $5}')
+              while read -r repo; do
+                untagged_images=$(aws ecr list-images --repository-name $repo --filter tagStatus=UNTAGGED --query 'imageIds[*]' --output text)
+                while read -r untagged_image; do
+                  aws ecr batch-delete-image --repository-name $repo --image-ids imageDigest="$untagged_image"
+                done <<< "$untagged_images"
+              done <<< "$repositories"
     on_success:
       - NOTIFY: rc_slack
     on_failure:
