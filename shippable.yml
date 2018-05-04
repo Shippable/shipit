@@ -601,7 +601,12 @@ jobs:
               while read -r repo; do
                 untagged_images=$(aws ecr list-images --repository-name $repo --filter tagStatus=UNTAGGED --query 'imageIds[*]' --output text)
                 while read -r untagged_image; do
-                  aws ecr batch-delete-image --repository-name $repo --image-ids imageDigest="$untagged_image"
+                  if [ ! -z "$untagged_image" ]; then
+                    echo "Deleting untagged image: $untagged_image from repo: $repo"
+                    aws ecr batch-delete-image --repository-name $repo --image-ids imageDigest="$untagged_image"
+                  else
+                    echo "No untagged image present in repo: $repo"
+                  fi
                 done <<< "$untagged_images"
               done <<< "$repositories"
     on_success:
