@@ -333,6 +333,24 @@ jobs:
             - ./tagAndPushAdmiralImageRepo.sh admiral_Ubuntu_16_04_tag_push u16admiral
             - popd
 
+  - name: tag_admiral_repo
+    type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
+    steps:
+      - IN: shipit_repo
+        switch: off
+      - IN: shipit_gh_ssh
+        switch: off
+      - IN: admiral_repo
+        switch: off
+      - IN: prod_release
+      - TASK:
+          script:
+            - pushd $(shipctl get_resource_state "shipit_repo")
+            - ./tagAdmiralRepo.sh tag_admiral_repo
+            - popd
+
   ### Tagging repo services
   - name: gh_ship_repos_tag_push
     type: runSh
