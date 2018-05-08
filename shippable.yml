@@ -218,10 +218,10 @@ jobs:
         switch: off
       - IN: aarch64_u16pytall_repo
         switch: off
-      - IN: aarch64_u16pyt_repo
-        switch: off
-      - IN: aarch64_u16cpp_repo
-        switch: off
+#      - IN: aarch64_u16pyt_repo
+#        switch: off
+#      - IN: aarch64_u16cpp_repo
+#        switch: off
       - IN: prod_release
       - TASK:
           script:
