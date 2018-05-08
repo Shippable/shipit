@@ -367,7 +367,7 @@ jobs:
         switch: off
       - IN: micro_sh_img
         switch: off
-      - IN: micro_repo
+      - IN: micro_sh_repo
         switch: off
       - IN: nexec_img
         switch: off
