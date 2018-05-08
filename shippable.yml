@@ -365,7 +365,7 @@ jobs:
         switch: off
       - IN: mktg_repo
         switch: off
-      - IN: micro_img
+      - IN: micro_sh_img
         switch: off
       - IN: micro_repo
         switch: off
@@ -416,7 +416,7 @@ jobs:
     steps:
       - IN: shipit_repo
         switch: off
-      - IN: genexec_img
+      - IN: genexec_sh_img
         switch: off
       - IN: shipit_bits_cli
         scopes:
@@ -566,7 +566,7 @@ jobs:
       - IN: www_img
       - IN: nexec_img
       - IN: mktg_img
-      - IN: micro_img
+      - IN: micro_sh_img
       - IN: u16admiral_img
       - IN: shipit_bits_cli
         scopes:
