@@ -20,13 +20,6 @@ resources:
       sourceName: shippable/reqProc
       branch: master
 
-#  - name: reqExec_repo
-#    type: gitRepo
-#    integration: avinci_gh
-#    pointer:
-#      sourceName: shippable/reqExec
-#      branch: master
-
   - name: execTemplates_repo
     type: gitRepo
     integration: avinci_gh
@@ -367,8 +360,8 @@ jobs:
         switch: off
       - IN: cexec_repo
         switch: off
-#      - IN: reqExec_repo
-#        switch: off
+      - IN: reqExec_repo
+        switch: off
       - IN: reqProc_repo
         switch: off
       - IN: reqKick_repo
