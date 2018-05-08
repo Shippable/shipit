@@ -88,17 +88,17 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: c7_repo
+      - IN: c7_dd_repo
         switch: off
-      - IN: c7all_repo
+      - IN: c7all_dd_repo
         switch: off
-      - IN: c7nodall_repo
+      - IN: c7nodall_dd_repo
         switch: off
-      - IN: c7pytall_repo
+      - IN: c7pytall_dd_repo
         switch: off
-      - IN: c7javall_repo
+      - IN: c7javall_dd_repo
         switch: off
-      - IN: c7cppall_repo
+      - IN: c7cppall_dd_repo
         switch: off
       - IN: prod_release
       - TASK:
@@ -118,29 +118,29 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: u16_repo
+      - IN: u16_dd_repo
         switch: off
-      - IN: u16all_repo
+      - IN: u16all_dd_repo
         switch: off
-      - IN: u16nodall_repo
+      - IN: u16nodall_dd_repo
         switch: off
-      - IN: u16pytall_repo
+      - IN: u16pytall_dd_repo
         switch: off
-      - IN: u16cloall_repo
+      - IN: u16cloall_dd_repo
         switch: off
-      - IN: u16golall_repo
+      - IN: u16golall_dd_repo
         switch: off
-      - IN: u16javall_repo
+      - IN: u16javall_dd_repo
         switch: off
-      - IN: u16scaall_repo
+      - IN: u16scaall_dd_repo
         switch: off
-      - IN: u16ruball_repo
+      - IN: u16ruball_dd_repo
         switch: off
-      - IN: u16phpall_repo
+      - IN: u16phpall_dd_repo
         switch: off
-      - IN: u16cppall_repo
+      - IN: u16cppall_dd_repo
         switch: off
-      - IN: u16microbase_repo
+      - IN: u16microbase_dd_repo
         switch: off
       - IN: prod_release
       - TASK:
@@ -161,27 +161,27 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: u14_repo
+      - IN: u14_dd_repo
         switch: off
-      - IN: u14all_repo
+      - IN: u14all_dd_repo
         switch: off
-      - IN: u14nodall_repo
+      - IN: u14nodall_dd_repo
         switch: off
-      - IN: u14pytall_repo
+      - IN: u14pytall_dd_repo
         switch: off
-      - IN: u14cloall_repo
+      - IN: u14cloall_dd_repo
         switch: off
-      - IN: u14golall_repo
+      - IN: u14golall_dd_repo
         switch: off
-      - IN: u14javall_repo
+      - IN: u14javall_dd_repo
         switch: off
-      - IN: u14scaall_repo
+      - IN: u14scaall_dd_repo
         switch: off
-      - IN: u14ruball_repo
+      - IN: u14ruball_dd_repo
         switch: off
-      - IN: u14phpall_repo
+      - IN: u14phpall_dd_repo
         switch: off
-      - IN: u14cppall_repo
+      - IN: u14cppall_dd_repo
         switch: off
       - IN: u14microbase_repo
         switch: off
