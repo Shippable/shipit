@@ -3,7 +3,7 @@ resources:
     type: gitRepo
     integration: avinci_gh
     versionTemplate:
-      sourceName: dry-dock/u16microbase
+      sourceName: "dry-dock/u16microbase"
       branch: master
 
   - name: u16microbase_dd_img
@@ -45,7 +45,7 @@ resources:
     type: gitRepo
     integration: avinci_gh
     versionTemplate:
-      sourceName: shippable/mktg
+      sourceName: "shippable/mktg"
       branch: master
 
   - name: mktg_sh_img
@@ -59,7 +59,7 @@ resources:
     type: gitRepo
     integration: avinci_gh
     versionTemplate:
-      sourceName: shippable/api
+      sourceName: "shippable/api"
       branch: master
 
   - name: api_sh_img
@@ -73,7 +73,7 @@ resources:
     type: gitRepo
     integration: avinci_gh
     versionTemplate:
-      sourceName: shippable/www
+      sourceName: "shippable/www"
       branch: master
 
   - name: www_sh_img

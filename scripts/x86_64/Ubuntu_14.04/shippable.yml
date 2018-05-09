@@ -3,7 +3,7 @@ resources:
     type: gitRepo
     integration: avinci_gh
     versionTemplate:
-      sourceName: dry-dock/u14microbase
+      sourceName: "dry-dock/u14microbase"
       branch: master
 
   - name: u14microbase_dd_img
@@ -22,7 +22,7 @@ resources:
 
   - name: u14admiral_sh_img
     type: image
-    integration: shipDH
+    integration: ecr_bits_push
     versionTemplate:
       sourceName: "374168611083.dkr.ecr.us-east-1.amazonaws.com/u14admiral"
       versionName: master
