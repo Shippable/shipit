@@ -106,7 +106,7 @@ jobs:
             - DH_USR_NAME=$(shipctl get_integration_resource_field $IMG_OUT "userName")
             - DH_PASS=$(shipctl get_integration_resource_field $IMG_OUT "password")
             - pushd $(shipctl get_resource_state "$RES_REPO")
-            - docker build -t=$IMG_NAME:$REL_VER --pull .
+            - docker build -t=$IMG_NAME:$REL_VER --pull --no-cache .
             - docker login -u $DH_USR_NAME -p $DH_PASS
             - docker push $IMG_NAME:$REL_VER
       - OUT: u16microbase_dd_img
@@ -142,7 +142,7 @@ jobs:
             - IMG_NAME=$(shipctl get_resource_version_key $IMG_OUT "sourceName")
             - pushd $(shipctl get_resource_state "$RES_REPO")
             - shipctl replace Dockerfile
-            - docker build -t=$IMG_NAME:$REL_VER --pull .
+            - docker build -t=$IMG_NAME:$REL_VER --pull --no-cache .
             - docker push $IMG_NAME:$REL_VER
             - aws ecr list-images --repository-name $IMG --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name $IMG --image-ids imageDigest=$line; done
       - OUT: u16admiral_sh_img
@@ -177,7 +177,7 @@ jobs:
             - REPO_COMMIT=$(shipctl get_resource_version_key "$RES_REPO" "shaData.commitSha")
             - IMG_NAME=$(shipctl get_resource_version_key $IMG_OUT "sourceName")
             - pushd $(shipctl get_resource_state "$RES_REPO")
-            - docker build -t=$IMG_NAME:$REL_VER --pull .
+            - docker build -t=$IMG_NAME:$REL_VER --pull --no-cache .
             - docker push $IMG_NAME:$REL_VER
             - aws ecr list-images --repository-name $IMG --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name $IMG --image-ids imageDigest=$line; done
       - OUT: mktg_sh_img
@@ -212,7 +212,7 @@ jobs:
             - REPO_COMMIT=$(shipctl get_resource_version_key "$RES_REPO" "shaData.commitSha")
             - IMG_NAME=$(shipctl get_resource_version_key $IMG_OUT "sourceName")
             - pushd $(shipctl get_resource_state "$RES_REPO")
-            - docker build -t=$IMG_NAME:$REL_VER --pull .
+            - docker build -t=$IMG_NAME:$REL_VER --pull --no-cache .
             - docker push $IMG_NAME:$REL_VER
             - aws ecr list-images --repository-name $IMG --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name $IMG --image-ids imageDigest=$line; done
       - OUT: www_sh_img
@@ -282,7 +282,7 @@ jobs:
             - REPO_COMMIT=$(shipctl get_resource_version_key "$RES_REPO" "shaData.commitSha")
             - IMG_NAME=$(shipctl get_resource_version_key $IMG_OUT "sourceName")
             - pushd $(shipctl get_resource_state "$RES_REPO")
-            - docker build -t=$IMG_NAME:$REL_VER --pull .
+            - docker build -t=$IMG_NAME:$REL_VER --pull --no-cache .
             - docker push $IMG_NAME:$REL_VER
             - aws ecr list-images --repository-name $IMG --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name $IMG --image-ids imageDigest=$line; done
       - OUT: nexec_sh_img
