@@ -13,6 +13,20 @@ resources:
       sourceName: "drydock/u14microbase"
       versionName: master
 
+  - name: u14admiral_sh_repo
+    type: gitRepo
+    integration: avinci_gh
+    versionTemplate:
+      sourceName: "shippable/admiral"
+      branch: master
+
+  - name: u14admiral_sh_img
+    type: image
+    integration: shipDH
+    versionTemplate:
+      sourceName: "374168611083.dkr.ecr.us-east-1.amazonaws.com/u14admiral"
+      versionName: master
+
 jobs:
   - name: u14microbase_x8664_build
     type: runSh
@@ -32,14 +46,50 @@ jobs:
           script:
             - REL_VER=$(shipctl get_resource_version_key "$IMG_BASE" "versionName")
             - REPO_COMMIT=$(shipctl get_resource_version_key "$RES_REPO" "shaData.commitSha")
-            - export IMG_NAME=$(shipctl get_resource_version_key $IMG_OUT "sourceName")
-            - export DH_USR_NAME=$(shipctl get_integration_resource_field $IMG_OUT "userName")
-            - export DH_PASS=$(shipctl get_integration_resource_field $IMG_OUT "password")
+            - IMG_NAME=$(shipctl get_resource_version_key $IMG_OUT "sourceName")
+            - DH_USR_NAME=$(shipctl get_integration_resource_field $IMG_OUT "userName")
+            - DH_PASS=$(shipctl get_integration_resource_field $IMG_OUT "password")
             - pushd $(shipctl get_resource_state "$RES_REPO")
             - docker build -t=$IMG_NAME:$REL_VER --pull .
             - docker login -u $DH_USR_NAME -p $DH_PASS
             - docker push $IMG_NAME:$REL_VER
       - OUT: u14microbase_dd_img
+    on_success:
+      script:
+        - shipctl put_resource_state_multi $JOB_NAME "versionName=$REL_VER" "IMG_REPO_COMMIT_SHA=$REPO_COMMIT"
+        - shipctl put_resource_state_multi $IMG_OUT "versionName=$REL_VER" "IMG_REPO_COMMIT_SHA=$REPO_COMMIT" "BUILD_NUMBER=$BUILD_NUMBER"
+
+  - name: u14admiral_x8664_build
+    type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
+    steps:
+      - IN: u14admiral_sh_repo
+      - IN: u14microbase_dd_img
+      - IN: u14_bits_access_cli
+        switch: off
+        scopes:
+          - ecr
+      - TASK:
+          name: u14admiral_build
+          runtime:
+            options:
+              env:
+                - IMG_BASE: "u14microbase_dd_img"
+                - IMG_OUT: "u14admiral_sh_img"
+                - RES_REPO: "u14admiral_sh_repo"
+                - IMG: "u14admiral"
+                - ADMIRAL_OS: "14"
+          script:
+            - REL_VER=$(shipctl get_resource_version_key "$IMG_BASE" "versionName")
+            - REPO_COMMIT=$(shipctl get_resource_version_key "$RES_REPO" "shaData.commitSha")
+            - IMG_NAME=$(shipctl get_resource_version_key $IMG_OUT "sourceName")
+            - pushd $(shipctl get_resource_state "$RES_REPO")
+            - shipctl replace Dockerfile
+            - docker build -t=$IMG_NAME:$REL_VER --pull .
+            - docker push $IMG_NAME:$REL_VER
+            - aws ecr list-images --repository-name $IMG --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name $IMG --image-ids imageDigest=$line; done
+      - OUT: u14admiral_sh_img
     on_success:
       script:
         - shipctl put_resource_state_multi $JOB_NAME "versionName=$REL_VER" "IMG_REPO_COMMIT_SHA=$REPO_COMMIT"
