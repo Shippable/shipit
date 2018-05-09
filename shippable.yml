@@ -535,7 +535,7 @@ jobs:
             - ARTIFACT_TAR="/tmp/$CONTEXT-$REL_VER.tar.gz"
             - ARTIFACT_ZIP="/tmp/$CONTEXT-$REL_VER.zip"
             - S3_BUCKET_DIR="$ARTIFACTS_BUCKET/$CONTEXT/$REL_VER/"
-            - pushd $(shipctl get_resource_state "archive_prep_repo")
+            - pushd $(shipctl get_resource_state "$RES_REPO")
             - git archive --format=tar.gz --output=$ARTIFACT_TAR --prefix=$CONTEXT/ $REL_VER
             - git archive --format=zip --output=$ARTIFACT_ZIP $REL_VER
             - aws s3 cp --acl public-read "$ARTIFACT_TAR" "$S3_BUCKET_DIR"
