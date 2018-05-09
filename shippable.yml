@@ -306,9 +306,9 @@ jobs:
         scopes:
           - ecr
         switch: off
-      - IN: u14admiral_img
+      - IN: u14admiral_sh_img
         switch: off
-      - IN: u16admiral_img
+      - IN: u16admiral_sh_img
         switch: off
       - TASK:
           script:
