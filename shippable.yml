@@ -208,20 +208,18 @@ jobs:
         switch: off
       - IN: aarch64_u16microbase_repo
         switch: off
-      - IN: aarch64_u16_repo
+      - IN: u16_aarch64_dd_repo
         switch: off
-      - IN: aarch64_u16all_repo
+      - IN: u16all_aarch64_dd_repo
         switch: off
-      - IN: aarch64_u16nodall_repo
+      - IN: u16nodall_aarch64_dd_repo
         switch: off
-      - IN: aarch64_u16cppall_repo
+      - IN: u16cppall_aarch64_dd_repo
         switch: off
-      - IN: aarch64_u16pytall_repo
+      - IN: u16pytall_aarch64_dd_repo
         switch: off
-#      - IN: aarch64_u16pyt_repo
-#        switch: off
-#      - IN: aarch64_u16cpp_repo
-#        switch: off
+      - IN: u16javall_aarch64_dd_repo
+        switch: off
       - IN: prod_release
       - TASK:
           script:
