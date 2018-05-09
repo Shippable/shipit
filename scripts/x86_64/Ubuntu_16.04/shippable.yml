@@ -22,9 +22,23 @@ resources:
 
   - name: u16admiral_sh_img
     type: image
-    integration: shipDH
+    integration: ecr_bits_push
     versionTemplate:
       sourceName: "374168611083.dkr.ecr.us-east-1.amazonaws.com/u16admiral"
+      versionName: master
+
+  - name: nexec_sh_repo
+    type: gitRepo
+    integration: avinci_gh
+    versionTemplate:
+      sourceName: shippable/nexec
+      branch: master
+
+  - name: nexec_sh_img
+    type: image
+    integration: ecr_bits_push
+    versionTemplate:
+      sourceName: "374168611083.dkr.ecr.us-east-1.amazonaws.com/nexec"
       versionName: master
 
 jobs:
@@ -90,6 +104,42 @@ jobs:
             - docker push $IMG_NAME:$REL_VER
             - aws ecr list-images --repository-name $IMG --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name $IMG --image-ids imageDigest=$line; done
       - OUT: u16admiral_sh_img
+    on_success:
+      script:
+        - shipctl put_resource_state_multi $JOB_NAME "versionName=$REL_VER" "IMG_REPO_COMMIT_SHA=$REPO_COMMIT"
+        - shipctl put_resource_state_multi $IMG_OUT "versionName=$REL_VER" "IMG_REPO_COMMIT_SHA=$REPO_COMMIT" "BUILD_NUMBER=$BUILD_NUMBER"
+
+  - name: u16nexec_x8664_build
+    type: runSh
+    triggerMode: parallel
+    dependencyMode: strict
+    steps:
+      - IN: nexec_sh_repo
+      - IN: u16microbase_dd_img
+      - IN: shipit_bits_access_cli
+        switch: off
+        scopes:
+          - ecr
+      - TASK:
+          name: u16nexec_build
+          runtime:
+            options:
+              env:
+                - IMG_BASE: "u16microbase_dd_img"
+                - IMG_OUT: "nexec_sh_img"
+                - RES_REPO: "nexec_sh_repo"
+                - IMG: "u16admiral"
+                - ADMIRAL_OS: "16"
+          script:
+            - REL_VER=$(shipctl get_resource_version_key "$IMG_BASE" "versionName")
+            - REPO_COMMIT=$(shipctl get_resource_version_key "$RES_REPO" "shaData.commitSha")
+            - IMG_NAME=$(shipctl get_resource_version_key $IMG_OUT "sourceName")
+            - pushd $(shipctl get_resource_state "$RES_REPO")
+            - shipctl replace Dockerfile
+            - docker build -t=$IMG_NAME:$REL_VER --pull .
+            - docker push $IMG_NAME:$REL_VER
+            - aws ecr list-images --repository-name $IMG --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name $IMG --image-ids imageDigest=$line; done
+      - OUT: nexec_sh_img
     on_success:
       script:
         - shipctl put_resource_state_multi $JOB_NAME "versionName=$REL_VER" "IMG_REPO_COMMIT_SHA=$REPO_COMMIT"
