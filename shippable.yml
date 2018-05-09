@@ -565,7 +565,7 @@ jobs:
       - IN: nexec_img
       - IN: mktg_img
       - IN: micro_sh_img
-      - IN: u16admiral_img
+      - IN: u16admiral_sh_img
       - IN: shipit_bits_cli
         scopes:
           - ecr
