@@ -20,6 +20,13 @@ resources:
       sourceName: shippable/reqProc
       branch: master
 
+  - name: admiral_repo
+    type: gitRepo
+    integration: avinci_gh
+    versionTemplate:
+      sourceName: "shippable/admiral"
+      branch: master
+
   - name: execTemplates_repo
     type: gitRepo
     integration: avinci_gh
