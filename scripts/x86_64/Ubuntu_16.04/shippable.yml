@@ -249,7 +249,6 @@ jobs:
             - REPO_COMMIT=$(shipctl get_resource_version_key "$RES_REPO" "shaData.commitSha")
             - IMG_NAME=$(shipctl get_resource_version_key $IMG_OUT "sourceName")
             - pushd $(shipctl get_resource_state "$RES_REPO")
-            - shipctl replace Dockerfile
             - docker build -t=$IMG_NAME:$REL_VER --pull .
             - docker push $IMG_NAME:$REL_VER
             - aws ecr list-images --repository-name $IMG --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name $IMG --image-ids imageDigest=$line; done
