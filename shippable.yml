@@ -206,7 +206,7 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: aarch64_u16microbase_repo
+      - IN: u16microbase_dd_repo
         switch: off
       - IN: u16_aarch64_dd_repo
         switch: off
