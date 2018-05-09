@@ -285,7 +285,7 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: admiral_repo
+      - IN: u16admiral_sh_repo
         switch: off
       - IN: prod_release
       - TASK:
@@ -535,7 +535,7 @@ jobs:
         scopes:
           - ecr
         switch: off
-      - IN: mktg_img
+      - IN: mktg_sh_img
         switch: off
       - IN: prod_release
         switch: off
