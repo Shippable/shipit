@@ -270,11 +270,11 @@ jobs:
       switch: off
     - IN: shipit_gh_ssh
       switch: off
-    - IN: w16_repo
+    - IN: w2k16_dd_repo
       switch: off
-    - IN: w16dotnetcore_repo
+    - IN: w2k16dotnetcore_dd_repo
       switch: off
-    - IN: w16aspnetcore_repo
+    - IN: w2k16aspnetcore_dd_repo
       switch: off
     - IN: prod_release
     - TASK:
