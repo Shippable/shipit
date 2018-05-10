@@ -50,8 +50,8 @@ jobs:
                git pull --tags
                if git tag -d $REL_VER; then
                  ls -al
- #                git push --delete up $REL_VER
                fi
+ #                git push --delete up $REL_VER
             - |
                git checkout $REPO_COMMIT
                git tag $REL_VER
