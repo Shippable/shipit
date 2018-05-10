@@ -189,7 +189,7 @@ jobs:
     dependencyMode: strict
     steps:
       - IN: prod_release
-      - IN: w16reqProc_dd_img
+      - IN: w2k16reqProc_dd_img
         switch: off
       - TASK:
           name: w16reqproc_tag
@@ -197,7 +197,7 @@ jobs:
             options:
               env:
                 - RES_VER: "prod_release"
-                - RES_IMG: "w16reqProc_dd_img"
+                - RES_IMG: "w2k16reqProc_dd_img"
           script:
             - REL_VER=$(shipctl get_resource_version_key "$RES_VER" "versionName")
             - |
