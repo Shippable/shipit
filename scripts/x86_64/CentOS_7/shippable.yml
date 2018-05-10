@@ -30,7 +30,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 $(shipctl get_json_value integration.json 'privateKey') > gh_ssh.key
+                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key & ssh-add gh_ssh.key
                popd
             - docker login -u $DH_USR_NAME -p $DH_PASS
@@ -38,6 +38,7 @@ jobs:
             - |
                docker tag "$IMG_NAME:$UP_IMG_TAG" "$IMG_NAME:$REL_VER"
 #               docker push "$IMG_NAME:$REL_VER"
+# $(shipctl get_json_value integration.json 'privateKey') > gh_ssh.key
             - |
                docker tag "$IMG_NAME:$UP_IMG_TAG" "$IMG_NAME:latest"
 #               docker push "$IMG_NAME:latest"
