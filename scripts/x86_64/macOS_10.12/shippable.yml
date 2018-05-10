@@ -5,7 +5,7 @@ jobs:
     dependencyMode: strict
     steps:
       - IN: prod_release
-      - IN: macOS10reqproc_dd_img
+      - IN: macOS10reqProc_dd_img
         switch: off
       - TASK:
           name: macOS10reqproc_tag
@@ -13,7 +13,7 @@ jobs:
             options:
               env:
                 - RES_VER: "prod_release"
-                - RES_IMG: "macOS10reqproc_dd_img"
+                - RES_IMG: "macOS10reqProc_dd_img"
           script:
             - REL_VER=$(shipctl get_resource_version_key "$RES_VER" "versionName")
             - |

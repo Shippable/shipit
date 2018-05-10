@@ -830,7 +830,7 @@ jobs:
     dependencyMode: strict
     steps:
       - IN: prod_release
-      - IN: u14reqproc_dd_img
+      - IN: u14reqProc_dd_img
         switch: off
       - TASK:
           name: u14reqproc_tag
@@ -838,7 +838,7 @@ jobs:
             options:
               env:
                 - RES_VER: "prod_release"
-                - RES_IMG: "u14reqproc_dd_img"
+                - RES_IMG: "u14reqProc_dd_img"
           script:
             - REL_VER=$(shipctl get_resource_version_key "$RES_VER" "versionName")
             - |
