@@ -13,13 +13,6 @@ resources:
       sourceName: "drydock/u16microbase"
       versionName: master
 
-  - name: u16admiral_sh_repo
-    type: gitRepo
-    integration: avinci_gh
-    versionTemplate:
-      sourceName: "shippable/admiral"
-      branch: master
-
   - name: u16admiral_sh_img
     type: image
     integration: ecr_bits_push
@@ -120,7 +113,7 @@ jobs:
     triggerMode: parallel
     dependencyMode: strict
     steps:
-      - IN: u16admiral_sh_repo
+      - IN: admiral_sh_repo
       - IN: u16microbase_dd_img
       - IN: shipit_bits_access_cli
         switch: off
@@ -133,7 +126,7 @@ jobs:
               env:
                 - IMG_BASE: "u16microbase_dd_img"
                 - IMG_OUT: "u16admiral_sh_img"
-                - RES_REPO: "u16admiral_sh_repo"
+                - RES_REPO: "admiral_sh_repo"
                 - IMG: "u16admiral"
                 - ADMIRAL_OS: "16"
           script:
