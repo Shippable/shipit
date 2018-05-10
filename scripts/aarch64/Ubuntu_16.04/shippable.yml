@@ -414,27 +414,27 @@ jobs:
       script:
         - shipctl put_resource_state_multi $JOB_NAME "versionName=$REL_VER" "TAG_COMMIT_SHA=$REPO_COMMIT" "TAG_IMG=$REL_VER"
 
-  - name: u16cpp_aarch64_tag
+  - name: u16javall_aarch64_tag
     type: runSh
     triggerMode: parallel
     dependencyMode: strict
     steps:
       - IN: prod_release
-      - IN: u16cpp_aarch64_dd_repo
+      - IN: u16javall_aarch64_dd_repo
         switch: off
-      - IN: u16cpp_aarch64_dd_img
+      - IN: u16javall_aarch64_dd_img
         switch: off
       - IN: shipit_gh_ssh
         switch: off
       - TASK:
-          name: u16cpp_tag
+          name: u16javall_tag
           runtime:
             options:
               env:
                 - RES_VER: "prod_release"
-                - RES_IMG: "u16cpp_aarch64_dd_img"
-                - RES_REPO: "u16cpp_aarch64_dd_repo"
-                - GIT_PATH: "git@github.com:dry-dock/aarch64_u16cpp.git"
+                - RES_IMG: "u16javall_aarch64_dd_img"
+                - RES_REPO: "u16javall_aarch64_dd_repo"
+                - GIT_PATH: "git@github.com:dry-dock/aarch64_u16javall.git"
           script:
             - REL_VER=$(shipctl get_resource_version_key "$RES_VER" "versionName")
             - |
