@@ -123,7 +123,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
@@ -184,7 +184,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
@@ -245,7 +245,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
@@ -306,7 +306,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
@@ -367,7 +367,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
@@ -428,7 +428,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
@@ -489,7 +489,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
@@ -550,7 +550,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
@@ -611,7 +611,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
@@ -672,7 +672,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
@@ -733,7 +733,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
@@ -794,7 +794,7 @@ jobs:
                DH_PASS=$(shipctl get_integration_resource_field "$RES_IMG" "password")
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
-                 cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
+                 shipctl get_json_value integration.json 'privateKey' > gh_ssh.key
                  chmod 600 gh_ssh.key
                  ssh-add gh_ssh.key
                popd
