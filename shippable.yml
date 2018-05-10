@@ -732,7 +732,7 @@ jobs:
               env:
                 - ARTIFACTS_BUCKET: "s3://shippable-artifacts/reports"
                 - REL_VER: "master"
-                - RES_REPO: "admiral_repo"
+                - RES_REPO: "admiral_sh_repo"
                 - CONTEXT: "admiral"
           script:
             - REPO_COMMIT=$(shipctl get_resource_version_key "$RES_REPO" "shaData.commitSha")
