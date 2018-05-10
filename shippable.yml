@@ -595,29 +595,6 @@ jobs:
       script:
         - shipctl put_resource_state_multi $JOB_NAME "versionName=$REL_VER" "TAG_COMMIT_SHA=$REPO_COMMIT" "TAG_IMG=$REL_VER"
 
-  - name: genexec_tag_push
-    type: runSh
-    dependencyMode: strict
-    triggerMode: parallel
-    steps:
-      - IN: shipit_repo
-        switch: off
-      - IN: genexec_sh_img
-        switch: off
-      - IN: shipit_bits_cli
-        scopes:
-          - ecr
-        switch: off
-      - IN: shipit_dh_cli
-        switch: off
-      - IN: prod_release
-      - TASK:
-          script:
-            - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagAndPushImage.sh genexec 374168611083.dkr.ecr.us-east-1.amazonaws.com prod_release
-            - ./tagAndPushImage.sh genexec drydock prod_release
-            - popd
-
   - name: reqProc_tag_push
     type: runSh
     triggerMode: parallel
