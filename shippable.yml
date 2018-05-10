@@ -21,12 +21,6 @@ resources:
     type: cliConfig
     integration: ric03uec-dockerhub
 
-  - name: shipit_bits_cli
-    type: cliConfig
-    integration: ecr_bits_push
-    pointer:
-      region: us-east-1
-
   - name: shipit_bits_access_cli
     type: cliConfig
     integration: aws_bits_access
@@ -755,7 +749,7 @@ jobs:
     steps:
       - IN: shipit_repo
         switch: off
-      - IN: shipit_bits_cli
+      - IN: shipit_bits_access_cli
         scopes:
           - ecr
         switch: off
@@ -790,7 +784,7 @@ jobs:
       - IN: mktg_sh_img
       - IN: micro_sh_img
       - IN: u16admiral_sh_img
-      - IN: shipit_bits_cli
+      - IN: shipit_bits_access_cli
         scopes:
           - ecr
         switch: off
