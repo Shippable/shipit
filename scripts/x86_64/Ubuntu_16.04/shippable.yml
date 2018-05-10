@@ -48,13 +48,6 @@ resources:
       sourceName: shippable/reqExec
       branch: master
 
-  - name: reqProc_sh_repo
-    type: gitRepo
-    integration: avinci_gh
-    versionTemplate:
-      sourceName: shippable/reqProc
-      branch: master
-
   - name: reqKick_sh_repo
     type: gitRepo
     integration: avinci_gh
