@@ -274,7 +274,7 @@ jobs:
               env:
                 - IMG_BASE: "u16microbase_dd_img"
                 - IMG_OUT: "nexec_sh_img"
-                - RES_REPO: "nexec_sh_repo"
+                - RES_REPO: "nexec_sh_repo  "
                 - IMG: "u16admiral"
                 - ADMIRAL_OS: "16"
           script:
