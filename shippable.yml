@@ -595,44 +595,6 @@ jobs:
       script:
         - shipctl put_resource_state_multi $JOB_NAME "versionName=$REL_VER" "TAG_COMMIT_SHA=$REPO_COMMIT" "TAG_IMG=$REL_VER"
 
-  - name: reqProc_tag_push
-    type: runSh
-    triggerMode: parallel
-    dependencyMode: strict
-    steps:
-      - IN: shipit_repo
-        switch: off
-      - IN: shipit_dh_cli
-        switch: off
-      - IN: prod_release
-      - TASK:
-          script:
-            - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagAndPushImage.sh u16reqproc drydock prod_release
-            - ./tagAndPushImage.sh u14reqproc drydock prod_release
-            - ./tagAndPushImage.sh m10reqproc drydock prod_release
-            - ./tagAndPushImage.sh aarch64_u16reqproc drydock prod_release
-            - popd
-
-  - name: reqProc_tag_push_w16
-    type: runSh
-    triggerMode: parallel
-    dependencyMode: strict
-    runtime:
-      nodePool: x86_w16_cus_01
-      container: false
-    steps:
-      - IN: shipit_repo
-        switch: off
-      - IN: shipit_dh_cli
-        switch: off
-      - IN: prod_release
-      - TASK:
-          script:
-            - pushd $(shipctl get_resource_state "shipit_repo")
-            - .\tagAndPushImage.ps1 w16reqproc drydock prod_release
-            - popd
-
   - name: reqExec_tag_push
     type: runSh
     triggerMode: parallel
