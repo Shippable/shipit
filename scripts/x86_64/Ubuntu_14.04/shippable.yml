@@ -15,7 +15,7 @@ resources:
 
   - name: u14admiral_sh_img
     type: image
-    integration: ecr_bits_push
+    integration: aws_bits_access
     versionTemplate:
       sourceName: "374168611083.dkr.ecr.us-east-1.amazonaws.com/u14admiral"
       versionName: master

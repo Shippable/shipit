@@ -19,7 +19,7 @@ resources:
 
   - name: shipit_dh_cli
     type: cliConfig
-    integration: ric03uec-dockerhub
+    integration: shipDH
 
   - name: shipit_bits_access_cli
     type: cliConfig
