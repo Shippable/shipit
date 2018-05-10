@@ -676,7 +676,7 @@ jobs:
   - name: s3_arch_node
     type: runSh
     steps:
-      - IN: node_repo
+      - IN: node_sh_repo
       - IN: shipit_bits_access_cli
         switch: off
       - TASK:
@@ -686,7 +686,7 @@ jobs:
               env:
                 - ARTIFACTS_BUCKET: "s3://shippable-artifacts/reports"
                 - REL_VER: "master"
-                - RES_REPO: "node_repo"
+                - RES_REPO: "node_sh_repo"
                 - CONTEXT: "node"
           script:
             - REPO_COMMIT=$(shipctl get_resource_version_key "$RES_REPO" "shaData.commitSha")
@@ -734,7 +734,7 @@ jobs:
   - name: s3_arch_cexec
     type: runSh
     steps:
-      - IN: cexec_repo
+      - IN: cexec_sh_repo
       - IN: shipit_bits_access_cli
         switch: off
       - TASK:
@@ -744,7 +744,7 @@ jobs:
               env:
                 - ARTIFACTS_BUCKET: "s3://shippable-artifacts/reports"
                 - REL_VER: "master"
-                - RES_REPO: "cexec_repo"
+                - RES_REPO: "cexec_sh_repo"
                 - CONTEXT: "cexec"
           script:
             - REPO_COMMIT=$(shipctl get_resource_version_key "$RES_REPO" "shaData.commitSha")

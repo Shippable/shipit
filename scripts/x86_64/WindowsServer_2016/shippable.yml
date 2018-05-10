@@ -182,7 +182,6 @@ jobs:
       script:
         - shipctl put_resource_state_multi $JOB_NAME "versionName=$REL_VER" "TAG_COMMIT_SHA=$REPO_COMMIT" "TAG_IMG=$REL_VER"
 
-
   - name: w16reqproc_dd_tag
     type: runSh
     triggerMode: parallel
