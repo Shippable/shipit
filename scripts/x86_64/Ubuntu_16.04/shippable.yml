@@ -1214,7 +1214,7 @@ jobs:
       script:
         - shipctl put_resource_state_multi $JOB_NAME "versionName=$REL_VER" "TAG_COMMIT_SHA=$REPO_COMMIT"
 
- - name: node_repo_tag
+  - name: node_repo_tag
     type: runSh
     triggerMode: parallel
     dependencyMode: strict
