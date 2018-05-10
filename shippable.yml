@@ -13,13 +13,6 @@ resources:
       sourceName: shippable/reqKick
       branch: master
 
-  - name: reqProc_repo
-    type: gitRepo
-    integration: avinci_gh
-    pointer:
-      sourceName: shippable/reqProc
-      branch: master
-
   - name: admiral_sh_repo
     type: gitRepo
     integration: avinci_gh
