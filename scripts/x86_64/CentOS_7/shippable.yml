@@ -31,7 +31,8 @@ jobs:
             - |
                pushd $(shipctl get_resource_meta "shipit_gh_ssh")
                  cat "integration.json"  | jq -r '.privateKey' > gh_ssh.key
-                 chmod 600 gh_ssh.key & ssh-add gh_ssh.key
+                 chmod 600 gh_ssh.key
+                 ssh-add gh_ssh.key
                popd
             - docker login -u $DH_USR_NAME -p $DH_PASS
             - docker pull "$IMG_NAME:$UP_IMG_TAG"
