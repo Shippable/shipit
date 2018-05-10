@@ -1,13 +1,13 @@
 jobs:
-  - name: u16_aarcg32_tag
+  - name: u16_aarch32_tag
     type: runSh
     triggerMode: parallel
     dependencyMode: strict
     steps:
       - IN: prod_release
-      - IN: u16_aarcg32_dd_repo
+      - IN: u16_aarch32_dd_repo
         switch: off
-      - IN: u16_aarcg32_dd_img
+      - IN: u16_aarch32_dd_img
         switch: off
       - IN: shipit_gh_ssh
         switch: off
@@ -17,9 +17,9 @@ jobs:
             options:
               env:
                 - RES_VER: "prod_release"
-                - RES_IMG: "u16_aarcg32_dd_img"
-                - RES_REPO: "u16_aarcg32_dd_repo"
-                - GIT_PATH: "git@github.com:dry-dock/aarcg32_u16.git"
+                - RES_IMG: "u16_aarch32_dd_img"
+                - RES_REPO: "u16_aarch32_dd_repo"
+                - GIT_PATH: "git@github.com:dry-dock/aarch32_u16.git"
           script:
             - REL_VER=$(shipctl get_resource_version_key "$RES_VER" "versionName")
             - |
