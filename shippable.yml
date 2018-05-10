@@ -83,49 +83,6 @@ resources:
         - "#prod"
 
 jobs:
-  ### Tagging u14 services
-  - name: dry_dh_x86_64_Ubuntu_tag_push
-    type: runSh
-    triggerMode: parallel
-    dependencyMode: strict
-    steps:
-      - IN: shipit_repo
-        switch: off
-      - IN: shipit_dh_cli
-        switch: off
-      - IN: shipit_gh_ssh
-        switch: off
-      - IN: u14_dd_repo
-        switch: off
-      - IN: u14all_dd_repo
-        switch: off
-      - IN: u14nodall_dd_repo
-        switch: off
-      - IN: u14pytall_dd_repo
-        switch: off
-      - IN: u14cloall_dd_repo
-        switch: off
-      - IN: u14golall_dd_repo
-        switch: off
-      - IN: u14javall_dd_repo
-        switch: off
-      - IN: u14scaall_dd_repo
-        switch: off
-      - IN: u14ruball_dd_repo
-        switch: off
-      - IN: u14phpall_dd_repo
-        switch: off
-      - IN: u14cppall_dd_repo
-        switch: off
-      - IN: u14microbase_dd_repo
-        switch: off
-      - IN: prod_release
-      - TASK:
-          script:
-            - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagAndPushSvcs.sh drydock dry-dock dhu14Drydock.txt dry_dh_x86_64_Ubuntu_tag_push
-            - popd
-
   - name: dry_dh_aarch_64_Ubuntu_tag_push
     type: runSh
     triggerMode: parallel
