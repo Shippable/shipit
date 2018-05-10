@@ -1168,10 +1168,6 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: shipit_bits_access_cli
-        switch: off
-        scopes:
-          - ecr
       - TASK:
           name: execTemplates_tag
           runtime:
@@ -1217,10 +1213,6 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: shipit_bits_access_cli
-        switch: off
-        scopes:
-          - ecr
       - TASK:
           name: node_tag
           runtime:
@@ -1266,10 +1258,6 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: shipit_bits_access_cli
-        switch: off
-        scopes:
-          - ecr
       - TASK:
           name: cexec_tag
           runtime:
@@ -1315,10 +1303,6 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: shipit_bits_access_cli
-        switch: off
-        scopes:
-          - ecr
       - TASK:
           name: reqExec_tag
           runtime:
@@ -1364,10 +1348,6 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: shipit_bits_access_cli
-        switch: off
-        scopes:
-          - ecr
       - TASK:
           name: reqProc_tag
           runtime:
@@ -1413,10 +1393,6 @@ jobs:
         switch: off
       - IN: shipit_gh_ssh
         switch: off
-      - IN: shipit_bits_access_cli
-        switch: off
-        scopes:
-          - ecr
       - TASK:
           name: reqKick_tag
           runtime:
