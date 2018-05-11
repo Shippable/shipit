@@ -697,7 +697,7 @@ jobs:
       - IN: shipit_rc_swarm
         switch: off
       - IN: baseami_patch
-      - IN: api_sh_img
+#      - IN: api_sh_img
       - IN: www_sh_img
 #      - IN: nexec_sh_img
       - IN: mktg_sh_img
