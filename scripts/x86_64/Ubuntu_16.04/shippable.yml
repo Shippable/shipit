@@ -6,6 +6,13 @@ resources:
       sourceName: "dry-dock/u16microbase"
       branch: master
 
+  - name: admiral_sh_repo
+    type: gitRepo
+    integration: avinci_gh
+    versionTemplate:
+      sourceName: "shippable/admiral"
+      branch: master
+
   - name: u16microbase_dd_img
     type: image
     integration: shipDH

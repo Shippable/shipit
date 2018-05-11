@@ -6,20 +6,9 @@ resources:
       sourceName: shippable/shipit
       branch: master
 
-  - name: admiral_sh_repo
-    type: gitRepo
-    integration: avinci_gh
-    versionTemplate:
-      sourceName: "shippable/admiral"
-      branch: master
-
   - name: shipit_gh_ssh
     type: integration
     integration: avi_gh_ssh
-
-  - name: shipit_dh_cli
-    type: cliConfig
-    integration: shipDH
 
   - name: shipit_bits_access_cli
     type: cliConfig
@@ -89,7 +78,6 @@ resources:
     versionTemplate:
       sourceName: "drydock/rabbitmq"
       versionName: master
-
 
   - name: gitlab_dd_repo
     type: gitRepo
@@ -574,27 +562,6 @@ jobs:
     on_success:
       script:
         - shipctl put_resource_state_multi $JOB_NAME "versionName=$REL_VER" "TAG_COMMIT_SHA=$REPO_COMMIT" "TAG_IMG=$REL_VER"
-
-  - name: reqExec_tag_push
-    type: runSh
-    triggerMode: parallel
-    dependencyMode: strict
-    steps:
-      - IN: shipit_repo
-        switch: off
-      - IN: shipit_bits_access_cli
-        switch: off
-      - IN: prod_release
-      - TASK:
-          script:
-            - pushd $(shipctl get_resource_state "shipit_repo")
-            - ./tagReqExecArtifacts.sh x86_64 Ubuntu_16.04 prod_release "tar.gz"
-            - ./tagReqExecArtifacts.sh x86_64 Ubuntu_14.04 prod_release "tar.gz"
-            - ./tagReqExecArtifacts.sh x86_64 CentOS_7 prod_release "tar.gz"
-            - ./tagReqExecArtifacts.sh x86_64 macOS_10.12 prod_release "tar.gz"
-            - ./tagReqExecArtifacts.sh x86_64 WindowsServer_2016 prod_release zip
-            - ./tagReqExecArtifacts.sh aarch64 Ubuntu_16.04 prod_release "tar.gz"
-            - popd
 
   - name: reports_tag_push
     type: runSh
