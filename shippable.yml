@@ -49,8 +49,8 @@ jobs:
         scopes:
           - ecr
         switch: off
-#      - IN: mktg_sh_img
-#        switch: off
+      - IN: mktg_sh_img
+        switch: off
       - IN: prod_release
         switch: off
       - TASK:
