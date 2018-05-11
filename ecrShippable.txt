@@ -1,5 +1,0 @@
-api
-micro
-mktg
-nexec
-www
