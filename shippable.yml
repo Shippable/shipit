@@ -77,7 +77,7 @@ jobs:
       - IN: api_sh_img
       - IN: www_sh_img
       - IN: nexec_sh_img
-#      - IN: mktg_sh_img
+      - IN: mktg_sh_img
       - IN: micro_sh_img
       - IN: u16admiral_sh_img
       - IN: shipit_bits_access_cli
