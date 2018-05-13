@@ -25,6 +25,7 @@ resources:
     version:
       params:
         secure: YFz2Vp+Rs5wa2oqAqfcZQsQQJjYrJkjr5oqJwC9B+guuckJ7zww575VD+5HgDxpNQ8q3IAvLHMBABaDl4m7XDdDvge+z9pgLC/TIiMIAl8LxzEJ3C+H/iF5JWS85O9iMc5000484KMEFZ10fmdijr7QkynaPntGerAbcKECP3X3d1PNDHTaJrJbq8gJqSlc6GT12fmscFMcZRP3vkuBK5ZeSr18PwL+zjqLLbPa2CPSQmMwHDIC6EgfW2va8SAH0eMml+cQ5U4ualbOTj2SExxdkXyJ1bm37WGS4zY1WIydFqGhLNQITq0NiYKNHbEXmGp5rlLivhFmZimd+WDOP7Q==
+
   - name: shippable_version
     type: version
     seed:
