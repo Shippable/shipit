@@ -112,7 +112,7 @@ jobs:
     on_failure:
       - NOTIFY: rc_slack
 
-  - name: prod_release_test
+  - name: prod_release
     type: release
     steps:
       - IN: shippable_version
