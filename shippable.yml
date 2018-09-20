@@ -29,7 +29,7 @@ resources:
   - name: shippable_version
     type: version
     seed:
-      versionName: "6.8.3"
+      versionName: "6.9.0"
 
   - name: rc_slack
     type: notification
