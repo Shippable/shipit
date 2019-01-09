@@ -121,3 +121,44 @@ jobs:
         switch: off
       - TASK: managed
         bump: patch
+
+  - name: backup_rc_db
+    type: runSh
+    integrations:
+      - aws-rc-pem
+      - aws_rc_access
+    steps:
+      - IN: shipit_rc_swarm
+        switch: off
+      - TASK:
+          runtime:
+            options:
+              env:
+                - SWARM_RES: shipit_rc_swarm
+                - PEM_RES: aws-rc-pem
+                - DB_HOST: msg1
+                - BACKUP_SCRIPT_PATH: /home/ubuntu/backupDb.sh
+                - BACKUP_OPTS: rc /backups true
+          script:
+            - |
+               # Set up context
+               BASTION_IP=$(shipctl get_resource_env $SWARM_RES RC_BASTION_IP)
+               BASTION_USER=$(shipctl get_resource_env $SWARM_RES RC_BASTION_USER)
+               BACKUP_EBS_VOLUME_ID=$(shipctl get_resource_env $SWARM_RES RC_BACKUP_EBS_VOLUME_ID)
+               PEM_FILE=$(shipctl get_resource_env $PEM_RES KEYPATH)
+
+            - |
+               # Run backup
+               ssh -i $PEM_FILE ${BASTION_USER}@${BASTION_IP} ssh $DB_HOST $BACKUP_SCRIPT_PATH $BACKUP_OPTS
+
+            - |
+               # Create snapshot
+               NOW=$(date +"%Y_%m_%d-%H_%M")
+               TAGS="ResourceType=snapshot,Tags=[{Key=Name,Value=prod-db-$NOW}]"
+               DESC="RC DB backup snapshot at $NOW"
+               aws ec2 create-snapshot --volume-id "$BACKUP_VOLUME_ID" --tag-specifications "$TAGS" --description "$DESC" | tee snapshot.json
+
+            - |
+               # Wait for snapshot to complete
+               SNAPSHOT_ID=$(jq -r .SnapshotId snapshot.json)
+               shippable_retry aws ec2 wait snapshot-completed --snapshot-ids $SNAPSHOT_ID
