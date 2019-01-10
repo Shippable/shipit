@@ -127,6 +127,7 @@ jobs:
     integrations:
       - aws-rc-pem
       - aws_rc_access
+      - ship-slack
     steps:
       - IN: shipit_rc_swarm
         switch: off
@@ -168,7 +169,8 @@ jobs:
             - |
                # Create snapshot
                NOW=$(date +"%Y_%m_%d-%H_%M")
-               TAGS="ResourceType=snapshot,Tags=[{Key=Name,Value=$CONTEXT-db-$NOW}]"
+               NAME="$CONTEXT-db-$NOW"
+               TAGS="ResourceType=snapshot,Tags=[{Key=Name,Value=$NAME}]"
                DESC="$CONTEXT DB backup snapshot at $NOW"
                export AWS_ACCESS_KEY_ID=$(shipctl get_integration_field $AWS_ACCESS_RES accessKey)
                export AWS_SECRET_ACCESS_KEY=$(shipctl get_integration_field $AWS_ACCESS_RES secretKey)
@@ -178,3 +180,8 @@ jobs:
                # Wait for snapshot to complete
                SNAPSHOT_ID=$(jq -r .SnapshotId snapshot.json)
                shippable_retry aws ec2 wait snapshot-completed --region $AWS_REGION --snapshot-ids $SNAPSHOT_ID
+          on_success:
+            - shipctl put_resource_state_multi $JOB_NAME "SNAPSHOT_ID=$SNAPSHOT_ID versionName=$NAME"
+            - shipctl notify ship-slack --recipient "#$CONTEXT" --text "$CONTEXT DB backup created with name $NAME and snapshot ID $SNAPSHOT_ID"
+          on_failure:
+            - shipctl notify ship-slack --recipient "#$CONTEXT" --text "*FAILED TO BACKUP $CONTEXT DB*" --color "#ff0000"
