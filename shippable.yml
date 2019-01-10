@@ -127,8 +127,9 @@ jobs:
     integrations:
       - aws-rc-pem
       - aws_rc_access
-      - ship-slack
     steps:
+      - IN: ship-slack
+        switch: off
       - IN: shipit_rc_swarm
         switch: off
       - TASK:
