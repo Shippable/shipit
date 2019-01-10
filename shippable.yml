@@ -148,6 +148,16 @@ jobs:
                PEM_FILE=$(shipctl get_resource_env $PEM_RES KEYPATH)
 
             - |
+               # Print context
+               echo BASTION_IP=$BASTION_IP
+               echo BASTION_USER=$BASTION_USER
+               echo BACKUP_EBS_VOLUME_ID=$BACKUP_EBS_VOLUME_ID
+               echo PEM_FILE=$PEM_FILE
+               echo DB_HOST=$DB_HOST
+               echo BACKUP_SCRIPT_PATH=$BACKUP_SCRIPT_PATH
+               echo BACKUP_OPTS=$BACKUP_OPTS
+
+            - |
                # Run backup
                ssh -i $PEM_FILE ${BASTION_USER}@${BASTION_IP} ssh $DB_HOST $BACKUP_SCRIPT_PATH $BACKUP_OPTS
 
