@@ -169,7 +169,7 @@ jobs:
                DESC="RC DB backup snapshot at $NOW"
                export AWS_ACCESS_KEY_ID=$(shipctl get_integration_field aws_rc_access accessKey)
                export AWS_SECRET_ACCESS_KEY=$(shipctl get_integration_field aws_rc_access secretKey)
-               aws ec2 create-snapshot --volume-id "$BACKUP_VOLUME_ID" --tag-specifications "$TAGS" --description "$DESC" --region $AWS_REGION | tee snapshot.json
+               aws ec2 create-snapshot --volume-id "$BACKUP_EBS_VOLUME_ID" --tag-specifications "$TAGS" --description "$DESC" --region $AWS_REGION | tee snapshot.json
 
             - |
                # Wait for snapshot to complete
