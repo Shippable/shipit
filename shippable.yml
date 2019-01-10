@@ -144,6 +144,7 @@ jobs:
                 - BACKUP_OPTS: rc /backups
                 - AWS_REGION: us-east-1
                 - CONTEXT: rc
+                - MAX_BACKUP_AGE: "1 day"
           script:
             - |
                # Set up context
@@ -181,10 +182,23 @@ jobs:
                # Wait for snapshot to complete
                SNAPSHOT_ID=$(jq -r .SnapshotId snapshot.json)
                shippable_retry aws ec2 wait snapshot-completed --region $AWS_REGION --snapshot-ids $SNAPSHOT_ID
-    on_success:
-      script:
-        - shipctl put_resource_state_multi $JOB_NAME "SNAPSHOT_ID=$SNAPSHOT_ID versionName=$NAME"
-        - shipctl notify rc_slack --recipient="#$CONTEXT" --text="$CONTEXT DB backup created with name $NAME and snapshot ID $SNAPSHOT_ID"
+
+            - |
+               # Notify successful backup
+               shipctl notify rc_slack --recipient="#$CONTEXT" --text="$CONTEXT DB backup created with name $NAME and snapshot ID $SNAPSHOT_ID"
+            - |
+               # Update job version info
+               shipctl put_resource_state_multi $JOB_NAME "SNAPSHOT_ID=$SNAPSHOT_ID versionName=$NAME"
+
+            - |
+               # Delete expired backups
+               TODAY=$(date +"%Y-%m-%d")
+               BACKUP_EXPIRY_DATE=$(date --date=$TODAY"-$MAX_BACKUP_AGE" +"%Y-%m-%d")
+               AWS_ACCOUNT_ID=$(aws sts get-caller-identity | jq -r .Account)
+               QUERY="Snapshots[?StartTime<\`$BACKUP_EXPIRY_DATE\`].{SnapshotId: SnapshotId}"
+               aws ec2 describe-snapshots --region us-east-1 --owner-ids $AWS_ACCOUNT_ID --query "$QUERY" > expired_snapshots.json
+               jq -r .[].SnapshotId expired_snapshots.json | xargs aws ec2 delete-snapshot --region $AWS_REGION --snapshot-id
+
     on_failure:
       script:
-        - shipctl notify rc_slack --recipient="#$CONTEXT" --text="*FAILED TO BACKUP $CONTEXT DB*" --color "#ff0000"
+        - shipctl notify rc_slack --recipient="#$CONTEXT" --text="*FAILED TO COMPLETE BACKUP OF $CONTEXT DB*" --color "#ff0000"
