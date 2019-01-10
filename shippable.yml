@@ -167,8 +167,8 @@ jobs:
                NOW=$(date +"%Y_%m_%d-%H_%M")
                TAGS="ResourceType=snapshot,Tags=[{Key=Name,Value=prod-db-$NOW}]"
                DESC="RC DB backup snapshot at $NOW"
-               AWS_ACCESS_KEY_ID=$(shipctl get_integration_field aws_rc_access accessKey)
-               AWS_SECRET_ACCESS_KEY=$(shipctl get_integration_field aws_rc_access secretKey)
+               export AWS_ACCESS_KEY_ID=$(shipctl get_integration_field aws_rc_access accessKey)
+               export AWS_SECRET_ACCESS_KEY=$(shipctl get_integration_field aws_rc_access secretKey)
                aws ec2 create-snapshot --volume-id "$BACKUP_VOLUME_ID" --tag-specifications "$TAGS" --description "$DESC" --region $AWS_REGION | tee snapshot.json
 
             - |
