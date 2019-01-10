@@ -128,7 +128,7 @@ jobs:
       - aws-rc-pem
       - aws_rc_access
     steps:
-      - IN: ship-slack
+      - IN: rc_slack
         switch: off
       - IN: shipit_rc_swarm
         switch: off
@@ -184,7 +184,7 @@ jobs:
     on_success:
       script:
         - shipctl put_resource_state_multi $JOB_NAME "SNAPSHOT_ID=$SNAPSHOT_ID versionName=$NAME"
-        - shipctl notify ship-slack --recipient "#$CONTEXT" --text "$CONTEXT DB backup created with name $NAME and snapshot ID $SNAPSHOT_ID"
+        - shipctl notify rc_slack --recipient "#$CONTEXT" --text "$CONTEXT DB backup created with name $NAME and snapshot ID $SNAPSHOT_ID"
     on_failure:
       script:
-        - shipctl notify ship-slack --recipient "#$CONTEXT" --text "*FAILED TO BACKUP $CONTEXT DB*" --color "#ff0000"
+        - shipctl notify rc_slack --recipient "#$CONTEXT" --text "*FAILED TO BACKUP $CONTEXT DB*" --color "#ff0000"
