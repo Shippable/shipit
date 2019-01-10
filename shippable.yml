@@ -139,6 +139,7 @@ jobs:
                 - DB_HOST: msg1
                 - BACKUP_SCRIPT_PATH: /home/ubuntu/backupDb.sh
                 - BACKUP_OPTS: rc /backups true
+                - AWS_REGION: us-east-1
           script:
             - |
                # Set up context
@@ -166,9 +167,9 @@ jobs:
                NOW=$(date +"%Y_%m_%d-%H_%M")
                TAGS="ResourceType=snapshot,Tags=[{Key=Name,Value=prod-db-$NOW}]"
                DESC="RC DB backup snapshot at $NOW"
-               aws ec2 create-snapshot --volume-id "$BACKUP_VOLUME_ID" --tag-specifications "$TAGS" --description "$DESC" | tee snapshot.json
+               aws ec2 create-snapshot --volume-id "$BACKUP_VOLUME_ID" --tag-specifications "$TAGS" --description "$DESC" --region $AWS_REGION | tee snapshot.json
 
             - |
                # Wait for snapshot to complete
                SNAPSHOT_ID=$(jq -r .SnapshotId snapshot.json)
-               shippable_retry aws ec2 wait snapshot-completed --snapshot-ids $SNAPSHOT_ID
+               shippable_retry aws ec2 wait snapshot-completed --region $AWS_REGION --snapshot-ids $SNAPSHOT_ID
