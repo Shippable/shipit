@@ -142,9 +142,9 @@ jobs:
           script:
             - |
                # Set up context
-               BASTION_IP=$(shipctl get_resource_env $SWARM_RES RC_BASTION_IP)
-               BASTION_USER=$(shipctl get_resource_env $SWARM_RES RC_BASTION_USER)
-               BACKUP_EBS_VOLUME_ID=$(shipctl get_resource_env $SWARM_RES RC_BACKUP_EBS_VOLUME_ID)
+               BASTION_IP=$RC_BASTION_IP
+               BASTION_USER=$RC_BASTION_USER
+               BACKUP_EBS_VOLUME_ID=$RC_BACKUP_EBS_VOLUME_ID
                PEM_FILE=$(shipctl get_resource_env $PEM_RES KEYPATH)
 
             - |
