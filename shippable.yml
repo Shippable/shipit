@@ -136,10 +136,12 @@ jobs:
               env:
                 - SWARM_RES: shipit_rc_swarm
                 - PEM_RES: aws-rc-pem
+                - AWS_ACCESS_RES: aws_rc_access
                 - DB_HOST: msg1
                 - BACKUP_SCRIPT_PATH: /home/ubuntu/backupDb.sh
-                - BACKUP_OPTS: rc /backups true
+                - BACKUP_OPTS: rc /backups
                 - AWS_REGION: us-east-1
+                - CONTEXT: rc
           script:
             - |
                # Set up context
@@ -150,6 +152,7 @@ jobs:
 
             - |
                # Print context
+               echo CONTEXT=$CONTEXT
                echo BASTION_IP=$BASTION_IP
                echo BASTION_USER=$BASTION_USER
                echo BACKUP_EBS_VOLUME_ID=$BACKUP_EBS_VOLUME_ID
@@ -165,10 +168,10 @@ jobs:
             - |
                # Create snapshot
                NOW=$(date +"%Y_%m_%d-%H_%M")
-               TAGS="ResourceType=snapshot,Tags=[{Key=Name,Value=prod-db-$NOW}]"
-               DESC="RC DB backup snapshot at $NOW"
-               export AWS_ACCESS_KEY_ID=$(shipctl get_integration_field aws_rc_access accessKey)
-               export AWS_SECRET_ACCESS_KEY=$(shipctl get_integration_field aws_rc_access secretKey)
+               TAGS="ResourceType=snapshot,Tags=[{Key=Name,Value=$CONTEXT-db-$NOW}]"
+               DESC="$CONTEXT DB backup snapshot at $NOW"
+               export AWS_ACCESS_KEY_ID=$(shipctl get_integration_field $AWS_ACCESS_RES accessKey)
+               export AWS_SECRET_ACCESS_KEY=$(shipctl get_integration_field $AWS_ACCESS_RES secretKey)
                aws ec2 create-snapshot --volume-id "$BACKUP_EBS_VOLUME_ID" --tag-specifications "$TAGS" --description "$DESC" --region $AWS_REGION | tee snapshot.json
 
             - |
