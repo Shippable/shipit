@@ -181,7 +181,9 @@ jobs:
                SNAPSHOT_ID=$(jq -r .SnapshotId snapshot.json)
                shippable_retry aws ec2 wait snapshot-completed --region $AWS_REGION --snapshot-ids $SNAPSHOT_ID
           on_success:
-            - shipctl put_resource_state_multi $JOB_NAME "SNAPSHOT_ID=$SNAPSHOT_ID versionName=$NAME"
-            - shipctl notify ship-slack --recipient "#$CONTEXT" --text "$CONTEXT DB backup created with name $NAME and snapshot ID $SNAPSHOT_ID"
+            script:
+              - shipctl put_resource_state_multi $JOB_NAME "SNAPSHOT_ID=$SNAPSHOT_ID versionName=$NAME"
+              - shipctl notify ship-slack --recipient "#$CONTEXT" --text "$CONTEXT DB backup created with name $NAME and snapshot ID $SNAPSHOT_ID"
           on_failure:
-            - shipctl notify ship-slack --recipient "#$CONTEXT" --text "*FAILED TO BACKUP $CONTEXT DB*" --color "#ff0000"
+            script:
+              - shipctl notify ship-slack --recipient "#$CONTEXT" --text "*FAILED TO BACKUP $CONTEXT DB*" --color "#ff0000"
