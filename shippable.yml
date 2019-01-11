@@ -38,6 +38,12 @@ resources:
       recipients:
         - "#rc"
 
+  - name: cron_backup_rc_db
+    type: time
+    versionTemplate:
+      # 04:30 UTC daily
+      interval: 30 4 * * *
+
 jobs:
   - name: mktg_patch
     type: runSh
@@ -132,6 +138,7 @@ jobs:
         switch: off
       - IN: shipit_rc_swarm
         switch: off
+      - IN: cron_backup_rc_db
       - TASK:
           runtime:
             options:
