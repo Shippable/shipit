@@ -194,12 +194,13 @@ jobs:
             - |
                # Delete expired backups
                TODAY=$(date +"%Y-%m-%d")
-               #BACKUP_EXPIRY_DATE=$(date --date=$TODAY"-$MAX_BACKUP_AGE" +"%Y-%m-%d")
-               # Debugging...
-               BACKUP_EXPIRY_DATE="2019-01-12"
+               BACKUP_EXPIRY_DATE=$(date --date=$TODAY"-$MAX_BACKUP_AGE" +"%Y-%m-%d")
                AWS_ACCOUNT_ID=$(aws sts get-caller-identity | jq -r .Account)
                QUERY="Snapshots[?StartTime<\`$BACKUP_EXPIRY_DATE\`].{SnapshotId: SnapshotId}"
                FILTERS=Name=tag:"Name",Values="$CONTEXT-db-*"
+               echo "Backup expiry date: $BACKUP_EXPIRY_DATE"
+               echo "Query: $QUERY"
+               echo "Filters: $FILTERS"
                aws ec2 describe-snapshots --region $AWS_REGION --owner-ids $AWS_ACCOUNT_ID --filters $FILTERS --query "$QUERY" | tee expired_snapshots.json
                NUM_EXPIRED_BACKUPS=$(jq '. | length' expired_snapshots.json)
                echo "$NUM_EXPIRED_BACKUPS expired backups found."
@@ -208,4 +209,4 @@ jobs:
                fi
     on_failure:
       script:
-        - shipctl notify rc_slack --recipient="#$CONTEXT" --text="*FAILED TO COMPLETE BACKUP OF $CONTEXT DB*" --color "#ff0000"
+        - shipctl notify rc_slack --recipient="#$CONTEXT" --text="*FAILED TO COMPLETE BACKUP OF $CONTEXT DB*" --color="#ff0000"
