@@ -29,7 +29,7 @@ resources:
   - name: shippable_version
     type: version
     seed:
-      versionName: "7.1.0"
+      versionName: "7.1.3"
 
   - name: drydock_version
     type: version
